@@ -25,22 +25,35 @@
 </head>
 <body>
 
-    <!-- SEARCH INPUT-->
-    <div class="search-container col-4">
-        <div class="input-group mb-3">
-            <button class="btn btn-secondary dropdown-toggle" id="buttontext" type="button" data-bs-toggle="dropdown">Location</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" id="itemtext" href="#">Keyword</a></li>
-            </ul>
-            <input type="text" class="form-control">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+    <!-- MAP CONTAINER -->
+    <div id="map-container" class="position-relative">
+
+        <!-- SEARCH CONTAINER-->
+        <div id="search-container" class="position-absolute">
+            <div class="input-group">
+                <button class="btn btn-secondary dropdown-toggle" id="buttontext" type="button"
+                    data-bs-toggle="dropdown">Location</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" id="itemtext" href="#">Keyword</a></li>
+                </ul>
+        
+                <div>
+                    <input type="text" id="search-input" class="form-control" />
+                </div>
+        
+                <button class="btn btn-secondary" type="button" id="search-btn">Search</button>
+            </div>
         </div>
+
+        <!-- SG MAP -->
+        <div id="sgmap">
+        </div>
+
     </div>
     
+    
 
-    <!-- MAP -->
-    <div id="sgmap">
-    </div>
+    
 
 
 
