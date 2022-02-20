@@ -7,6 +7,15 @@ async function main(){
 
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here
+            
+            // Search bar dropdown toggle
+            document.querySelector('#itemtext').addEventListener('click', function(){
+                //alert('clicked!')
+                let text = document.querySelector('#buttontext').innerText;
+                document.querySelector('#buttontext').innerText = document.querySelector('#itemtext').innerText;
+                document.querySelector('#itemtext').innerText = text;
+            })
+            
         })
     }
 
