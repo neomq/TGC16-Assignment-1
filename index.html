@@ -26,13 +26,11 @@
 <body>
 
     <!-- MAP CONTAINER -->
-    <div id="map-container" class="d-flex flex-column">
+    <div id="map-container" class="position-relative">
 
         <!-- SEARCH CONTAINER-->
-        <div id="search-container" class="p-2">
-            
+        <div id="search-container" class="position-absolute mt-2 top-0 start-50 translate-middle-x p-2 rounded">
             <div class="d-flex flex-column p-2">
-                
                 <div class="input-group mb-2">
                     <button class="btn btn-outline-dark dropdown-toggle" id="buttontext" type="button" data-bs-toggle="dropdown">Location</button>
                     <ul class="dropdown-menu">
@@ -40,10 +38,8 @@
                     </ul>
                     <input type="text" id="search-input" class="form-control" placeholder="Search">
                 </div>
-                
-                <button class="btn btn-dark p-2" type="button" id="search-btn">Search</button>
+                <button class="btn btn-dark p-2 rounded" type="button" id="search-btn">Search</button>
             </div>
-
         </div>
 
          <!-- SG MAP -->

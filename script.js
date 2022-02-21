@@ -33,7 +33,6 @@ async function main(){
                 } else if (document.querySelector('#buttontext').innerText == 'Location'){
                     location = document.querySelector("#search-input").value;
                 }
-                
                 let response = await search(keyword, location);
                 // console.log(response);
                 
@@ -48,7 +47,6 @@ async function main(){
                     searchMarker.bindPopup(`<div>${eachResult.name}</div>`); // bind popup to all markers
                 }
                 
-                
 
             })
 
@@ -57,9 +55,9 @@ async function main(){
         // Map Setup
         function initMap() {
             let singapore = [1.29, 103.85];
-            let mapObject = L.map('sgmap').setView(singapore, 13);
-
-            // zoomControl: false 
+            let mapObject = L.map('sgmap',{ zoomControl: false}).setView(singapore, 13); //disable zoomControl when initializing map
+            // change position of zoom control
+            L.control.zoom({position:'bottomright'}).addTo(mapObject);
 
             // Tile layers boilerplate
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {

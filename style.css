@@ -3,6 +3,7 @@
 }
 
 #search-container {
+    width: 90%;
     background-color: #fff;
     z-index: 314159;
     /* top: 12px;
