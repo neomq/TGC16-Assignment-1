@@ -1,5 +1,3 @@
-console.dir(document)
-
 // Main function
 async function main(){
 
@@ -14,13 +12,6 @@ async function main(){
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
 
-            // Search bar dropdown toggle
-            document.querySelector('#itemtext').addEventListener('click', function(){
-                // alert('clicked!')
-                let text = document.querySelector('#buttontext').innerText;
-                document.querySelector('#buttontext').innerText = document.querySelector('#itemtext').innerText;
-                document.querySelector('#itemtext').innerText = text;
-            })
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
@@ -32,13 +23,14 @@ async function main(){
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
                 
+                // get search value
                 let keyword = "";
                 let location = "";
-                // Toggle search field
-                if (document.querySelector('#buttontext').innerText == 'Keyword'){
+                if (document.querySelector("#search-input").value){
                     keyword = document.querySelector("#search-input").value;
-                } else if (document.querySelector('#buttontext').innerText == 'Location'){
-                    location = document.querySelector("#search-input").value;
+                }
+                if (document.querySelector("#location-input").value){
+                    location = document.querySelector("#location-input").value;
                 }
                 let response = await search(keyword, location);
                 // console.log(response);
