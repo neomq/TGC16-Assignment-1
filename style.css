@@ -1,13 +1,10 @@
 #sgmap {
-    height: 90vh;
+    height: 100vh;
 }
 
 #search-container {
+    background-color: #fff;
     z-index: 314159;
-    top: 12px;
-    left: 80px;
-}
-
-#search-input {
-    width: 40vw;
+    /* top: 12px;
+    left: 80px; */
 }

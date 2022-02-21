@@ -26,27 +26,28 @@
 <body>
 
     <!-- MAP CONTAINER -->
-    <div id="map-container" class="position-relative">
+    <div id="map-container" class="d-flex flex-column">
 
         <!-- SEARCH CONTAINER-->
-        <div id="search-container" class="position-absolute">
-            <div class="input-group">
-                <button class="btn btn-secondary dropdown-toggle" id="buttontext" type="button"
-                    data-bs-toggle="dropdown">Location</button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="itemtext" href="#">Keyword</a></li>
-                </ul>
-        
-                <div>
-                    <input type="text" id="search-input" class="form-control" />
+        <div id="search-container" class="p-2">
+            
+            <div class="d-flex flex-column p-2">
+                
+                <div class="input-group mb-2">
+                    <button class="btn btn-outline-dark dropdown-toggle" id="buttontext" type="button" data-bs-toggle="dropdown">Location</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="itemtext" href="#">Keyword</a></li>
+                    </ul>
+                    <input type="text" id="search-input" class="form-control" placeholder="Search">
                 </div>
-        
-                <button class="btn btn-secondary" type="button" id="search-btn">Search</button>
+                
+                <button class="btn btn-dark p-2" type="button" id="search-btn">Search</button>
             </div>
+
         </div>
 
-        <!-- SG MAP -->
-        <div id="sgmap">
+         <!-- SG MAP -->
+         <div id="sgmap">
         </div>
 
     </div>

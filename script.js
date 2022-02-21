@@ -5,6 +5,10 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
+        // Map search result layer
+        let searchResultLayer = L.layerGroup();
+        searchResultLayer.addTo(mapObject);
+
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
 
@@ -17,9 +21,13 @@ async function main(){
             })
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
+
+                // clear prior search results
+                searchResultLayer.clearLayers();
+
                 let keyword = "";
                 let location = "";
-
+                // Toggle search field
                 if (document.querySelector('#buttontext').innerText == 'Keyword'){
                     keyword = document.querySelector("#search-input").value;
                 } else if (document.querySelector('#buttontext').innerText == 'Location'){
@@ -36,10 +44,10 @@ async function main(){
                     let coordinates = [lat,lng];
 
                     let searchMarker = L.marker(coordinates);
-                    searchMarker.bindPopup(`<div>${eachResult.name}</div><div>${eachResult.location.address}</div>`) // bind popup to all markers
-                    
-                    searchMarker.addTo(mapObject);
+                    searchMarker.addTo(searchResultLayer);
+                    searchMarker.bindPopup(`<div>${eachResult.name}</div>`); // bind popup to all markers
                 }
+                
                 
 
             })
@@ -50,6 +58,8 @@ async function main(){
         function initMap() {
             let singapore = [1.29, 103.85];
             let mapObject = L.map('sgmap').setView(singapore, 13);
+
+            // zoomControl: false 
 
             // Tile layers boilerplate
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
