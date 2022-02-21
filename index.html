@@ -28,22 +28,35 @@
     <!-- MAP CONTAINER -->
     <div id="map-container" class="position-relative">
 
-        <!-- SEARCH CONTAINER-->
+        <!-- Search Bar-->
         <div id="search-container" class="position-absolute mt-2 top-0 start-50 translate-middle-x p-2 rounded">
             <div class="d-flex flex-column p-2">
-                <div class="input-group mb-2">
+                <div class="input-group mb-2" id="search-bar">
                     <button class="btn btn-outline-dark dropdown-toggle" id="buttontext" type="button" data-bs-toggle="dropdown">Location</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" id="itemtext" href="#">Keyword</a></li>
                     </ul>
                     <input type="text" id="search-input" class="form-control" placeholder="Search">
                 </div>
-                <button class="btn btn-dark p-2 rounded" type="button" id="search-btn">Search</button>
+                <!-- Search button -->
+                <button class="btn btn-dark p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasScrolling" id="search-btn">Search</button>
             </div>
         </div>
 
-         <!-- SG MAP -->
-         <div id="sgmap">
+        <!-- Search Pane -->
+        <div class="offcanvas offcanvas-bottom p-3 rounded-top" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasBottom">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasBottomLabel">Results</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small" id="search-results">
+                
+            </div>
+        </div>
+
+
+        <!-- SG MAP -->
+        <div id="sgmap">
         </div>
 
     </div>

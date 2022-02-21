@@ -3,9 +3,17 @@
 }
 
 #search-container {
-    width: 90%;
-    background-color: #fff;
+    width: 96%;
+    /* background-color: #fff; */
     z-index: 314159;
-    /* top: 12px;
-    left: 80px; */
+}
+
+#search-results {
+    /* background-color: #fff; */
+    width: 100%;
+    z-index: 314160;
+}
+
+#search-bar {
+    background-color: #fff;
 }

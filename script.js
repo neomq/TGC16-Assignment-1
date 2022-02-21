@@ -1,3 +1,5 @@
+console.dir(document)
+
 // Main function
 async function main(){
 
@@ -5,9 +7,9 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
-        // Map search result layer
-        let searchResultLayer = L.layerGroup();
-        searchResultLayer.addTo(mapObject);
+        // Map search result layer for the markers
+        let markerSearchResultLayer = L.layerGroup();
+        markerSearchResultLayer.addTo(mapObject);
 
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
@@ -22,9 +24,14 @@ async function main(){
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
-                // clear prior search results
-                searchResultLayer.clearLayers();
+                // Display search results
+                let searchResultElement = document.querySelector("#search-results");
 
+                // clear prior search markers
+                markerSearchResultLayer.clearLayers();
+                // clear prior search results
+                document.querySelector('#search-results').textContent = "";
+                
                 let keyword = "";
                 let location = "";
                 // Toggle search field
@@ -35,7 +42,7 @@ async function main(){
                 }
                 let response = await search(keyword, location);
                 // console.log(response);
-                
+
                 // map markers
                 for (let eachResult of response.results){
                     let lat = eachResult.geocodes.main.latitude;
@@ -43,11 +50,15 @@ async function main(){
                     let coordinates = [lat,lng];
 
                     let searchMarker = L.marker(coordinates);
-                    searchMarker.addTo(searchResultLayer);
                     searchMarker.bindPopup(`<div>${eachResult.name}</div>`); // bind popup to all markers
+                    searchMarker.addTo(markerSearchResultLayer);
+                    
+                    // append search results to searchResultElement
+                    let resultElement = document.createElement('div');
+                    resultElement.innerHTML = eachResult.name;
+                    resultElement.className = 'search-result';
+                    searchResultElement.appendChild(resultElement);
                 }
-                
-
             })
 
         })
