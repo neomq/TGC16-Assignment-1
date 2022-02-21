@@ -15,7 +15,7 @@ async function main(){
                 document.querySelector('#buttontext').innerText = document.querySelector('#itemtext').innerText;
                 document.querySelector('#itemtext').innerText = text;
             })
-            // Search function
+            // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
                 let keyword = "";
                 let location = "";
@@ -25,9 +25,25 @@ async function main(){
                 } else if (document.querySelector('#buttontext').innerText == 'Location'){
                     location = document.querySelector("#search-input").value;
                 }
+                
                 let response = await search(keyword, location);
-                console.log(response)
+                // console.log(response);
+                
+                // map markers
+                for (let eachResult of response.results){
+                    let lat = eachResult.geocodes.main.latitude;
+                    let lng = eachResult.geocodes.main.longitude;
+                    let coordinates = [lat,lng];
+
+                    let searchMarker = L.marker(coordinates);
+                    searchMarker.bindPopup(`<div>${eachResult.name}</div><div>${eachResult.location.address}</div>`) // bind popup to all markers
+                    
+                    searchMarker.addTo(mapObject);
+                }
+                
+
             })
+
         })
 
         // Map Setup

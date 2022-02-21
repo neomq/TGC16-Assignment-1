@@ -11,6 +11,7 @@ async function search(keyword, location){
             'query': keyword,
             'categories': '11128',
             'near': near,
+            'limit': 50,
             'v': '02202022'
         },
         headers: {
