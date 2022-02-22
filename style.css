@@ -22,3 +22,9 @@
     background-color: #fff;
     border-radius: 12px;
 }
+
+#results-container {
+    bottom: 0;
+    margin: auto;
+    z-index: 314161;
+}

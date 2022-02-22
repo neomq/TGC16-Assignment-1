@@ -36,24 +36,60 @@
         <!-- Search -->
         <div id="search-container" class="position-absolute mt-2 top-0 start-50 translate-middle-x">
             <div class="d-flex flex-column p-3" id="search-group">
-                <div class="p-1"><input type="text" id="search-input" class="form-control" placeholder="What are you searching for?"></div>
-                <div class="p-1"><input type="email" id="location-input" class="form-control" placeholder="Area"></div>
+                <!-- keyword input -->
+                <div class="p-1"><input type="text" id="search-input" class="form-control" placeholder="I'm Looking For..."></div>
+              
+                <!-- category input -->
+                <div class="p-1">
+                    <select class="form-select" id="category-input" aria-label="Default select example">
+                        <option selected>Category</option>
+                        <option value="1">Working Space</option>
+                        <option value="2">Meeting Room</option>
+                    </select>
+                </div>
+
+                <!-- location input -->
+                <div class="p-1">
+                    <input class="form-control" list="datalistOptions" id="location-input" placeholder="Nearby">
+                    <datalist id="datalistOptions">
+                        <option value="Ang Mo Kio">
+                        <option value="Bedok">
+                        <option value="Bishan">
+                        <option value="Boon Lay">
+                        <option value="Bukit Batok">
+                        <option value="Bukit Panjang">
+                        <option value="Bukit Timah">
+                        <option value="Changi">
+                        <option value="Chua Chu Kang">
+                        <option value="City Hall">
+                        <option value="Clementi">
+                        <option value="Downtown">
+                        <option value="Geylang">
+                        <option value="Hougang">
+                        <option value="Jurong East">
+                        <option value="Jurong West">
+                        <option value="Kallang">
+                    </datalist>
+                </div>
+
                 <!-- Search button -->
                 <div class="d-grid p-1">
-                    <button class="btn btn-dark rounded mt-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasScrolling" id="search-btn">Search</button>
+                    <button class="btn btn-dark rounded mt-1" type="button" id="search-btn">Search</button>
                 </div>
             </div>
         </div>
 
         <!-- Search Results Pane -->
-        <div class="offcanvas offcanvas-bottom p-3 rounded-top" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasBottom">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasBottomLabel">Results</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div id="results-container" class="position-absolute w-auto">
+
+            <div class="results-header">
+                <h4>Results</h4>
+                <button type="button"></button>
             </div>
-            <div class="offcanvas-body small" id="search-results">
-                
+            <div id="search-results">
+                <!-- append search results child -->
             </div>
+
         </div>
 
 

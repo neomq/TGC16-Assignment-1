@@ -15,9 +15,6 @@ async function main(){
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
-                // Display search results
-                let searchResultElement = document.querySelector("#search-results");
-
                 // clear prior search markers
                 markerSearchResultLayer.clearLayers();
                 // clear prior search results
@@ -25,15 +22,25 @@ async function main(){
                 
                 // get search value
                 let keyword = "";
+                let category = "";
                 let location = "";
-                if (document.querySelector("#search-input").value){
-                    keyword = document.querySelector("#search-input").value;
+                
+                let searchValue = document.querySelector("#search-input").value;
+                let catValue = document.querySelector("#category-input").value;
+                let locationValue = document.querySelector("#location-input").value
+                
+                if (searchValue){ keyword = searchValue; }
+                if (catValue === "1") {
+                    category = "11128"; // working space
+                } else if (catValue === "2") {
+                    category = "11129"; // meeting rooms
                 }
-                if (document.querySelector("#location-input").value){
-                    location = document.querySelector("#location-input").value;
-                }
-                let response = await search(keyword, location);
-                // console.log(response);
+                if (locationValue){ location = document.querySelector("#location-input").value; }
+                
+                let response = await search(keyword, category, location);
+                console.log("key: ", keyword, "category: ", category, "near: ", location);
+                console.log(response);
+
 
                 // map markers
                 for (let eachResult of response.results){
@@ -44,6 +51,9 @@ async function main(){
                     let searchMarker = L.marker(coordinates);
                     searchMarker.bindPopup(`<div>${eachResult.name}</div>`); // bind popup to all markers
                     searchMarker.addTo(markerSearchResultLayer);
+
+                    // Display search results
+                    let searchResultElement = document.querySelector("#search-results");
                     
                     // append search results to searchResultElement
                     let resultElement = document.createElement('div');
