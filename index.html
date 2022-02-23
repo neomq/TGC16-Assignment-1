@@ -34,50 +34,75 @@
     <div id="map-container" class="position-relative">
 
         <!-- Search -->
-        <div id="search-container" class="position-absolute mt-2 top-0 start-50 translate-middle-x">
-            <div class="d-flex flex-column p-3" id="search-group">
-                <!-- keyword input -->
-                <div class="p-1"><input type="text" id="search-input" class="form-control" placeholder="I'm Looking For..."></div>
-              
-                <!-- category input -->
-                <div class="p-1">
-                    <select class="form-select" id="category-input" aria-label="Default select example">
-                        <option selected>Category</option>
-                        <option value="1">Working Space</option>
-                        <option value="2">Meeting Room</option>
-                    </select>
-                </div>
-
-                <!-- location input -->
-                <div class="p-1">
-                    <input class="form-control" list="datalistOptions" id="location-input" placeholder="Nearby">
-                    <datalist id="datalistOptions">
-                        <option value="Ang Mo Kio">
-                        <option value="Bedok">
-                        <option value="Bishan">
-                        <option value="Boon Lay">
-                        <option value="Bukit Batok">
-                        <option value="Bukit Panjang">
-                        <option value="Bukit Timah">
-                        <option value="Changi">
-                        <option value="Chua Chu Kang">
-                        <option value="City Hall">
-                        <option value="Clementi">
-                        <option value="Downtown">
-                        <option value="Geylang">
-                        <option value="Hougang">
-                        <option value="Jurong East">
-                        <option value="Jurong West">
-                        <option value="Kallang">
-                    </datalist>
-                </div>
-
-                <!-- Search button -->
-                <div class="d-grid p-1">
-                    <button class="btn btn-dark rounded mt-1" type="button" id="search-btn">Search</button>
+        <nav class="position-absolute top-0 start-50 translate-middle-x">
+        
+            <!-- main search bar -->
+            <div class="ps-3 pe-3 pt-2 pb-2" id="search-bar">
+                <div class="d-flex d-flex align-items-center">
+                    <div id="toggle-search" class="icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <!-- search keyword input -->
+                    <div class="flex-fill p-1"><input type="text" id="search-input" class="form-control"
+                            placeholder="I'm Looking For..."></div>
+        
                 </div>
             </div>
-        </div>
+            <!-- end main search bar -->
+        
+            <div class="col slide">
+                <div class="d-flex flex-column pt-1 ps-3 pe-3" id="slide-content">
+        
+                    <!-- category box -->
+                    <div class="d-flex align-items-center" id="category-bar">
+                        <div class="icon"><i class="fa-solid fa-building"></i></div>
+                        <!-- category input -->
+                        <div class="p-1 flex-fill">
+                            <select class="form-select" id="category-input" aria-label="Default select example">
+                                <option selected>Category</option>
+                                <option value="1">Working Space</option>
+                                <option value="2">Meeting Room</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- end category box -->
+        
+                    <!-- location box -->
+                    <div class="d-flex align-items-center" id="location-bar">
+                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <!-- location input -->
+                        <div class="p-1 flex-fill">
+                            <input class="form-control" list="datalistOptions" id="location-input" placeholder="Nearby">
+                            <datalist id="datalistOptions">
+                                <option value="Ang Mo Kio">
+                                <option value="Bedok">
+                                <option value="Bishan">
+                                <option value="Boon Lay">
+                                <option value="Bukit Batok">
+                                <option value="Bukit Panjang">
+                                <option value="Bukit Timah">
+                                <option value="Changi">
+                                <option value="Chua Chu Kang">
+                                <option value="City Hall">
+                                <option value="Clementi">
+                                <option value="Downtown">
+                                <option value="Geylang">
+                                <option value="Hougang">
+                                <option value="Jurong East">
+                                <option value="Jurong West">
+                                <option value="Kallang">
+                            </datalist>
+                        </div>
+                    </div>
+                    <!-- end location box -->
+        
+                    <!-- Search button -->
+                    <div class="d-grid p-1">
+                        <button class="btn btn-dark rounded mt-1" type="button" id="search-btn">Search</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
         <!-- Search Results Pane -->
         <div id="results-container" class="position-absolute w-auto">

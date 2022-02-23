@@ -12,6 +12,16 @@ async function main(){
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
 
+            // Collapse and expand search bar
+            document.querySelector("#search-input").addEventListener('click', function () {
+                document.querySelector(".slide").style.height = "155px";
+                document.querySelector("#search-bar").style.borderRadius = "10px 10px 0px 0px";
+            })
+            document.querySelector("#search-btn").addEventListener('click', function () {
+                document.querySelector(".slide").style.height = "0px";
+                document.querySelector("#search-bar").style.borderRadius = "10px 10px 10px 10px";
+            })
+
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
@@ -34,13 +44,14 @@ async function main(){
                     category = "11128"; // working space
                 } else if (catValue === "2") {
                     category = "11129"; // meeting rooms
+                } else {
+                    category = "11128, 11129"; // search all working space and meeting rooms
                 }
                 if (locationValue){ location = document.querySelector("#location-input").value; }
                 
                 let response = await search(keyword, category, location);
                 console.log("key: ", keyword, "category: ", category, "near: ", location);
                 console.log(response);
-
 
                 // map markers
                 for (let eachResult of response.results){
