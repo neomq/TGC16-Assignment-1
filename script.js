@@ -15,11 +15,11 @@ async function main(){
             // Collapse and expand search bar
             document.querySelector("#search-input").addEventListener('click', function () {
                 document.querySelector(".slide").style.height = "155px";
-                document.querySelector("#search-bar").style.borderRadius = "10px 10px 0px 0px";
+                document.querySelector("#search-bar").style.borderRadius = "8px 8px 0px 0px";
             })
             document.querySelector("#search-btn").addEventListener('click', function () {
                 document.querySelector(".slide").style.height = "0px";
-                document.querySelector("#search-bar").style.borderRadius = "10px 10px 10px 10px";
+                document.querySelector("#search-bar").style.borderRadius = "8px 8px 8px 8px";
             })
 
             // Search function -  when user clicks on search button
@@ -37,7 +37,7 @@ async function main(){
                 
                 let searchValue = document.querySelector("#search-input").value;
                 let catValue = document.querySelector("#category-input").value;
-                let locationValue = document.querySelector("#location-input").value
+                let locationValue = document.querySelector("#location-input").value;
                 
                 if (searchValue){ keyword = searchValue; }
                 if (catValue === "1") {
@@ -50,7 +50,7 @@ async function main(){
                 if (locationValue){ location = document.querySelector("#location-input").value; }
                 
                 let response = await search(keyword, category, location);
-                console.log("key: ", keyword, "category: ", category, "near: ", location);
+                console.log("search results for", keyword, "--", category, " near ", location);
                 console.log(response);
 
                 // map markers
