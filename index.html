@@ -29,73 +29,73 @@
 
 </head>
 <body>
+    <div id="container">
+        <!-- MAP CONTAINER -->
+        <div id="map-container" class="row">
 
-    <!-- MAP CONTAINER -->
-    <div id="map-container" class="row">
-
-        <!-- SG MAP -->
-        <div id="sgmap">
-            
-            <!-- Search Form-->
-            <div class="search-container shadow position-absolute top-0 start-50 translate-middle-x bg-white mt-5 p-2 rounded-2">
-                <form>
-                    <div class="row d-flex px-2">
-                        <div class="col-lg-3 py-2 d-flex align-items-center form-group">
-                            <div class="icon">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+            <!-- SG MAP -->
+            <div id="sgmap">
+                
+                <!-- Search Form-->
+                <div class="search-container shadow position-absolute top-0 start-50 translate-middle-x bg-white mt-5 p-2 rounded-2">
+                    <form>
+                        <div class="row d-flex px-2">
+                            <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                                <div class="icon">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
                             </div>
-                            <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
-                        </div>
+                    
+                            <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                                <div class="icon"><i class="fa-solid fa-building"></i></div>
+                                <select id="category-input" class="form-select border-0">
+                                    <option selected>Category</option>
+                                    <option value="1">Co-working Space</option>
+                                    <option value="2">Meeting Room</option>
+                                </select>
+                            </div>
+                    
+                            <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                                <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
+                                <datalist id="datalistOptions">
+                                    <option value="Ang Mo Kio">
+                                    <option value="Bedok">
+                                    <option value="Bishan">
+                                    <option value="Boon Lay">
+                                    <option value="Bukit Batok">
+                                    <option value="Bukit Panjang">
+                                    <option value="Bukit Timah">
+                                    <option value="Clementi">
+                                </datalist>
+                            </div>
+                    
+                            <div class="col-lg-3 p-2 d-grid">
+                                <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
+                            </div>
+                    
+                        </div> <!-- end div row -->
+                    
+                    </form>
+                </div>
                 
-                        <div class="col-lg-3 py-2 d-flex align-items-center form-group">
-                            <div class="icon"><i class="fa-solid fa-building"></i></div>
-                            <select id="category-input" class="form-select border-0">
-                                <option selected>Category</option>
-                                <option value="1">Co-working Space</option>
-                                <option value="2">Meeting Room</option>
-                            </select>
-                        </div>
-                
-                        <div class="col-lg-3 py-2 d-flex align-items-center form-group">
-                            <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-                            <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
-                            <datalist id="datalistOptions">
-                                <option value="Ang Mo Kio">
-                                <option value="Bedok">
-                                <option value="Bishan">
-                                <option value="Boon Lay">
-                                <option value="Bukit Batok">
-                                <option value="Bukit Panjang">
-                                <option value="Bukit Timah">
-                                <option value="Clementi">
-                            </datalist>
-                        </div>
-                
-                        <div class="col-lg-3 p-2 d-grid">
-                            <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
-                        </div>
-                
-                    </div> <!-- end div row -->
-                
-                </form>
             </div>
-            
+
+            <!-- Search Results Pane -->
+            <div id="results-container" class="pt-2 p-4">
+
+                <div class="results-header">
+                    <h5 class="results-title">Results</h5>
+                </div>
+                <div id="search-results">
+                    <!-- append search results child -->
+                </div>
+
+            </div>
+
         </div>
-
-        <!-- Search Results Pane -->
-        <div id="results-container" class="pt-2 p-4">
-
-            <div class="results-header">
-                <h5 class="results-title">Results</h5>
-            </div>
-            <div id="search-results">
-                <!-- append search results child -->
-            </div>
-
-        </div>
-
     </div>
-    
     
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

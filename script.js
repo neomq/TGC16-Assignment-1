@@ -15,6 +15,8 @@ async function main(){
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
+                document.querySelector('#results-container').style.height = "300px";
+
                 // clear prior search markers
                 markerSearchResultLayer.clearLayers();
                 // clear prior search results
@@ -61,6 +63,14 @@ async function main(){
                     resultElement.innerHTML = eachResult.name;
                     resultElement.className = 'search-result';
                     searchResultElement.appendChild(resultElement);
+
+                    // Event listener to resultElement
+                    resultElement.addEventListener('click', function(){
+                        // zoom to the location on map
+                        mapObject.flyTo(coordinates, 16); // check out leaflet documentation - map methods for modifying map state
+                        // marker popup
+                        searchMarker.openPopup();
+                    })
                 }
             })
 

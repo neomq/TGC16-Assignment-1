@@ -3,15 +3,19 @@
     padding: 0;
     box-sizing: border-box;
 }
-    
+
+#container {
+    overflow: hidden;
+}
+
 /* MAP */
 #map-container {
+    height: 100vh;
     position: relative;
 }
 
 #sgmap {
-    height: 100vh;
-    padding: 0;
+    height: 100%;
 }
 
 /* SEARCH */
@@ -32,30 +36,29 @@
 #results-container {
     position: absolute;
     width: 100%;
-    height: 200px;
+    max-height: 300px;
     bottom: 0;
     z-index: 314161;
     background: white;
 }
 
 #search-results {
-    /* width: 100%; */
     z-index: 314160;
     background: white;
 }
 
-/* for desktop */
+/* For Desktop */
 @media screen and (min-width: 768px) {
     #map-container {
         display: flex;
         flex-direction: row;
     }
     #sgmap {
-        width: 70vw;
+        width: 70%;
     }
     #results-container {
         position: initial;
-        width: 30vw;
-        height: 100vh;
+        width: 30%;
+        height: 100%;
     }
 }
