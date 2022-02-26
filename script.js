@@ -12,16 +12,6 @@ async function main(){
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
 
-            // Collapse and expand search bar
-            document.querySelector("#search-input").addEventListener('click', function () {
-                document.querySelector(".slide").style.height = "155px";
-                document.querySelector("#search-bar").style.borderRadius = "8px 8px 0px 0px";
-            })
-            document.querySelector("#search-btn").addEventListener('click', function () {
-                document.querySelector(".slide").style.height = "0px";
-                document.querySelector("#search-bar").style.borderRadius = "8px 8px 8px 8px";
-            })
-
             // Search function -  when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
@@ -50,7 +40,7 @@ async function main(){
                 if (locationValue){ location = document.querySelector("#location-input").value; }
                 
                 let response = await search(keyword, category, location);
-                console.log("search results for", keyword, "--", category, " near ", location);
+                // console.log("search results for", keyword, "--", category, " near ", location);
                 console.log(response);
 
                 // map markers

@@ -34,89 +34,56 @@
     <div id="map-container" class="row">
 
         <!-- SG MAP -->
-        <div id="sgmap" class="position-relative col-sm-12 col-md-8">
+        <div id="sgmap">
+            
             <!-- Search Form-->
-            <nav class="position-absolute shadow">
-            
-                <!-- 1. Main Search -->
-                <div class="p-2" id="search-bar">
-                    <div class="d-flex d-flex align-items-center">
-                        <div id="toggle-search" class="icon">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="search-container shadow position-absolute top-0 start-50 translate-middle-x bg-white mt-5 p-2 rounded-2">
+                <form>
+                    <div class="row d-flex px-2">
+                        <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                            <div class="icon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
                         </div>
-                        <!-- search keyword input -->
-                        <div class="flex-fill p-1"><input type="text" id="search-input" class="form-control"
-                                placeholder="Search keyword"></div>
-            
-                    </div>
-                </div>
-                <!-- End Main Search -->
                 
-                <!-- 2. Dropdown -->
-                <div class="col slide">
-                    <div class="row pt-1 ps-2 pe-2" id="slide-content">
-            
-                        <!-- category box -->
-                        <div class="d-flex align-items-center" id="category-bar">
+                        <div class="col-lg-3 py-2 d-flex align-items-center form-group">
                             <div class="icon"><i class="fa-solid fa-building"></i></div>
-                            <!-- category input -->
-                            <div class="p-1 flex-fill">
-                                <select class="form-select" id="category-input" aria-label="Default select example">
-                                    <option selected>Category</option>
-                                    <option value="1">Working Space</option>
-                                    <option value="2">Meeting Room</option>
-                                </select>
-                            </div>
+                            <select id="category-input" class="form-select border-0">
+                                <option selected>Category</option>
+                                <option value="1">Co-working Space</option>
+                                <option value="2">Meeting Room</option>
+                            </select>
                         </div>
-                        <!-- end category box -->
-            
-                        <!-- location box -->
-                        <div class="d-flex align-items-center" id="location-bar">
+                
+                        <div class="col-lg-3 py-2 d-flex align-items-center form-group">
                             <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-                            <!-- location input -->
-                            <div class="p-1 flex-fill">
-                                <input class="form-control" list="datalistOptions" id="location-input" placeholder="Nearby">
-                                <datalist id="datalistOptions">
-                                    <option value="Ang Mo Kio">
-                                    <option value="Bedok">
-                                    <option value="Bishan">
-                                    <option value="Boon Lay">
-                                    <option value="Bukit Batok">
-                                    <option value="Bukit Panjang">
-                                    <option value="Bukit Timah">
-                                    <option value="Changi">
-                                    <option value="Chua Chu Kang">
-                                    <option value="Clementi">
-                                    <option value="Downtown">
-                                    <option value="Geylang">
-                                    <option value="Hougang">
-                                    <option value="Jurong East">
-                                    <option value="Jurong West">
-                                    <option value="Kallang">
-                                </datalist>
-                            </div>
+                            <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
+                            <datalist id="datalistOptions">
+                                <option value="Ang Mo Kio">
+                                <option value="Bedok">
+                                <option value="Bishan">
+                                <option value="Boon Lay">
+                                <option value="Bukit Batok">
+                                <option value="Bukit Panjang">
+                                <option value="Bukit Timah">
+                                <option value="Clementi">
+                            </datalist>
                         </div>
-                        <!-- end location box -->
-                    </div>
-
-                    <!-- 3. Search Button -->
-                    <div class="col">
-                        <div class="d-flex flex-column pt-1 p-2">
-                            <div class="d-flex align-items-center p-1">
-                                <button class="btn btn-dark rounded-pill flex-fill shadow-sm" type="button" id="search-btn">Search</button>
-                            </div>
+                
+                        <div class="col-lg-3 p-2 d-grid">
+                            <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
                         </div>
-                    </div>
-                    
-                    <!-- End Search Button -->
-                </div>
-                <!-- End Dropdown -->
-
-            </nav>
+                
+                    </div> <!-- end div row -->
+                
+                </form>
+            </div>
+            
         </div>
 
         <!-- Search Results Pane -->
-        <div id="results-container" class="col-sm-12 col-md-4 pt-2 p-4">
+        <div id="results-container" class="pt-2 p-4">
 
             <div class="results-header">
                 <h5 class="results-title">Results</h5>
