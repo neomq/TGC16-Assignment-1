@@ -37,17 +37,17 @@
             <div id="sgmap">
                 
                 <!-- Search Form-->
-                <div class="search-container shadow position-absolute top-0 start-50 translate-middle-x bg-white mt-5 p-2 rounded-2">
+                <div class="search-container shadow position-absolute top-0 start-50 translate-middle-x bg-white mt-4 p-2 rounded-3">
                     <form>
-                        <div class="row d-flex px-2">
-                            <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                        <div class="row d-flex px-3">
+                            <div class="col-lg-3 py-1 d-flex align-items-center form-group">
                                 <div class="icon">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
                             </div>
                     
-                            <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                            <div class="col-lg-3 py-1 d-flex align-items-center form-group">
                                 <div class="icon"><i class="fa-solid fa-building"></i></div>
                                 <select id="category-input" class="form-select border-0">
                                     <option selected>Category</option>
@@ -56,7 +56,7 @@
                                 </select>
                             </div>
                     
-                            <div class="col-lg-3 py-2 d-flex align-items-center form-group">
+                            <div class="col-lg-3 py-1 d-flex align-items-center form-group">
                                 <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
                                 <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
                                 <datalist id="datalistOptions">
@@ -67,7 +67,21 @@
                                     <option value="Bukit Batok">
                                     <option value="Bukit Panjang">
                                     <option value="Bukit Timah">
+                                    <option value="Changi">
+                                    <option value="Choa Chu Kang">
+                                    <option value="City Hall">
                                     <option value="Clementi">
+                                    <option value="Downtown">
+                                    <option value="Geylang">
+                                    <option value="Hougang">
+                                    <option value="Jurong East">
+                                    <option value="Jurong West">
+                                    <option value="Kallang">
+                                    <option value="Marina East">
+                                    <option value="Marina South">
+                                    <option value="Newton">
+                                    <option value="Novena">
+                                    <option value="Orchard">
                                 </datalist>
                             </div>
                     
@@ -82,14 +96,15 @@
                 
             </div>
 
-            <!-- Search Results Pane -->
-            <div id="results-container" class="pt-2 p-4">
+            <!-- Search Results Tab -->
+            <div id="results-container" class="shadow">
 
-                <div class="results-header">
-                    <h5 class="results-title">Results</h5>
+                <div id="results-header">
+                    <h5 id="results-title" class="lead py-3"></h5>
                 </div>
+
                 <div id="search-results">
-                    <!-- append search results child -->
+                    <!-- append search results -->
                 </div>
 
             </div>

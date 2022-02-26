@@ -12,17 +12,15 @@ async function main(){
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
 
-            // Search function -  when user clicks on search button
+            // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
-
-                document.querySelector('#results-container').style.height = "300px";
 
                 // clear prior search markers
                 markerSearchResultLayer.clearLayers();
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
                 
-                // get search value
+                // get place search value
                 let keyword = "";
                 let category = "";
                 let location = "";
@@ -40,29 +38,64 @@ async function main(){
                     category = "11128, 11129"; // search all working space and meeting rooms
                 }
                 if (locationValue){ location = document.querySelector("#location-input").value; }
-                
-                let response = await search(keyword, category, location);
-                // console.log("search results for", keyword, "--", category, " near ", location);
-                console.log(response);
+                let near = `${location},Singapore` // string seperated by comma
+
+                let response1 = await search(keyword, category, near);
+                console.log(response1);
+
+                // display number of search results
+                let resultsNumber = response1.results.length;
+                document.querySelector('#results-title').innerHTML = `${resultsNumber} results`;
 
                 // map markers
-                for (let eachResult of response.results){
+                for (let eachResult of response1.results){
                     let lat = eachResult.geocodes.main.latitude;
                     let lng = eachResult.geocodes.main.longitude;
                     let coordinates = [lat,lng];
 
+                    // create marker
                     let searchMarker = L.marker(coordinates);
-                    searchMarker.bindPopup(`<div>${eachResult.name}</div>`); // bind popup to all markers
-                    searchMarker.addTo(markerSearchResultLayer);
 
-                    // Display search results
-                    let searchResultElement = document.querySelector("#search-results");
+                    // get photos fsq_id from results
+                    let photoFsqid = eachResult.fsq_id;
+                    // get place photo from foursquare
+                    let response2 = await searchPhotos(photoFsqid);
+                    // console.log(response2);
+                    let photoUrl = "";
+                    if (response2[0]) {
+                        let prefix = response2[0].prefix;
+                        let suffix = response2[0].suffix;
+                        photoUrl = prefix + '192x144' + suffix;
+                    }
+
+                    // create popup
+                    searchMarker.bindPopup(`<img src="${photoUrl}">
+                                            <h6>${eachResult.name}</h6>`);
+                    searchMarker.addTo(markerSearchResultLayer);
                     
+                    let searchResultElement = document.querySelector('#search-results');
+
                     // append search results to searchResultElement
                     let resultElement = document.createElement('div');
-                    resultElement.innerHTML = eachResult.name;
-                    resultElement.className = 'search-result';
+                    resultElement.className = 'search-result card mb-3 p-2 shadow-sm';
+
+                    let resultElementCard = document.createElement('div');
+                    resultElementCard.className = 'card-body';
+
+                    let resultTitle = document.createElement('h6');
+                    resultTitle.className = 'card-title';
+
+                    let resultText = document.createElement('p');
+                    resultText.className = 'card-text text-muted';
+
+                    resultTitle.innerHTML = eachResult.name;
+                    resultText.innerHTML = eachResult.location.formatted_address;
+                    
+                    // append child
                     searchResultElement.appendChild(resultElement);
+                    resultElement.appendChild(resultElementCard);
+                    resultElementCard.appendChild(resultTitle);
+                    resultElementCard.appendChild(resultText);
 
                     // Event listener to resultElement
                     resultElement.addEventListener('click', function(){
@@ -71,6 +104,9 @@ async function main(){
                         // marker popup
                         searchMarker.openPopup();
                     })
+
+                    // auto-click to zoom to first search result location
+                    document.querySelector('.search-result').click();
                 }
             })
 

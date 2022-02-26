@@ -1,12 +1,10 @@
 const API_BASE_URL="https://api.foursquare.com/v3";
 const API_KEY="fsq39KAcQFbTaS1UcZfkT7ZQAkGv7nIP4Wtkhziu4dcLibg=";
 
-// search function
-async function search(keyword, category, location){
-    
-    let near = 'singapore' + ',' + location; // string seperated by comma
+// search
+async function search(keyword, category, near){
 
-    let response = await axios.get(API_BASE_URL + '/places/search', {
+    let response1 = await axios.get(API_BASE_URL + '/places/search', {
         params: {
             'query': keyword,
             'categories': category,
@@ -19,5 +17,19 @@ async function search(keyword, category, location){
             'Authorization': API_KEY
         }
     })
-    return response.data;
+    return response1.data;
+}
+
+// search photos
+async function searchPhotos(fsq_id){
+    let response2 = await axios.get(API_BASE_URL + `/places/${fsq_id}/photos`, {
+        params: {
+            'classifications': 'indoor'
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': API_KEY
+        }
+    })
+    return response2.data;
 }
