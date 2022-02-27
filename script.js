@@ -40,7 +40,7 @@ async function main(){
 
                 let response1 = await search(keyword, near);
                 console.log("search: ", keyword, "near ", near)
-                console.log(response1);
+                // console.log(response1);
 
                 // display search summary and number of search results
                 let resultsNumber = response1.results.length;
@@ -75,6 +75,18 @@ async function main(){
                         photoUrl = prefix + '200x150' + suffix;
                     }
 
+                    // get place details from results
+                    let response3 = await searchPlaceDetails(fsqid);
+                    // console.log(response3);
+                    let website = "";
+                    if (response3.website) {
+                        website = response3.website;
+                    }
+                    let openingHours = "";
+                    if (response3.hours.display) {
+                        openingHours = response3.hours.display;
+                    }
+                    
                     // create popup content
                     let popupContent = document.createElement('div');
                     popupContent.className = 'py-1';
@@ -106,32 +118,36 @@ async function main(){
                     let resultTitle = document.createElement('h6');
                     resultTitle.className = 'card-title';
 
-                    let resultCat = document.createElement('p');
-                    resultCat.className = 'card-category lead fs-6';
+                    let resultHours = document.createElement('p');
+                    resultHours.className = 'card-category lead fs-6';
 
-                    let resultText = document.createElement('p');
-                    resultText.className = 'card-text text-muted';
+                    let resultLocation = document.createElement('p');
+                    resultLocation.className = 'card-text text-muted';
+
+                    let resultWeb = document.createElement('p');
 
                     resultTitle.innerHTML = eachResult.name;
-                    resultCat.innerHTML = eachResult.categories[0].name; // for self-reference only
-                    resultText.innerHTML += eachResult.location.formatted_address;
+                    resultHours.innerHTML = openingHours;
+                    resultLocation.innerHTML += eachResult.location.formatted_address;
+                    resultWeb.innerHTML = `<a href="${website}" class="link-primary">${website}</a>`;
                     
                     // append child
                     searchResultElement.appendChild(resultElement);
                     resultElement.appendChild(resultElementCard);
                     resultElementCard.appendChild(resultTitle);
-                    resultElementCard.appendChild(resultCat);
-                    resultElementCard.appendChild(resultText);
+                    resultElementCard.appendChild(resultHours);
+                    resultElementCard.appendChild(resultLocation);
+                    resultElementCard.appendChild(resultWeb);
+
 
                     // Event listener to resultElement
                     resultElement.addEventListener('click', function(){
                         // zoom to the location on map
                         mapObject.flyTo(coordinates, 16); // check out leaflet documentation - map methods for modifying map state
-                        // marker popup
                         searchMarker.openPopup();
                     })
 
-                    // auto-click to zoom to first search result location
+                    // auto-click first search result location
                     document.querySelector('.search-result').click();
 
                 }

@@ -33,3 +33,17 @@ async function searchPhotos(fsq_id){
     })
     return response2.data;
 }
+
+// search place details
+async function searchPlaceDetails(fsq_id){
+    let response3 = await axios.get(API_BASE_URL + `/places/${fsq_id}`, {
+        params: {
+            'fields': 'description,website,rating,hours'
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': API_KEY
+        }
+    })
+    return response3.data;
+}
