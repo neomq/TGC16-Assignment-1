@@ -30,74 +30,62 @@
 </head>
 <body>
     <div id="container">
+
+        <!-- Search Form-->
+        <div class="search-container shadow bg-white p-2">
+            <form>
+                <div class="row d-flex px-3">
+                    <div class="col-lg-3 py-1 d-flex align-items-center form-group">
+                        <div class="icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
+                    </div>
+            
+                    <div class="col-lg-3 py-1 d-flex align-items-center form-group">
+                        <div class="icon"><i class="fa-solid fa-building"></i></div>
+                        <select id="category-input" class="form-select border-0">
+                            <option selected>Category</option>
+                            <option value="1">Co-working Space</option>
+                            <option value="2">Meeting Room</option>
+                        </select>
+                    </div>
+            
+                    <div class="col-lg-3 py-1 d-flex align-items-center form-group">
+                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
+                        <datalist id="datalistOptions">
+                            <option value="Ang Mo Kio">
+                            <option value="Bedok">
+                            <option value="Bishan">
+                            <option value="Boon Lay">
+                            <option value="Bukit Batok">
+                            <option value="Bukit Panjang">
+                            <option value="Bukit Timah">
+                            <option value="Changi">
+                            <option value="Choa Chu Kang">
+                            <option value="City Hall">
+                            <option value="Clementi">
+                        </datalist>
+                    </div>
+            
+                    <div class="col-lg-3 p-2 d-grid">
+                        <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
+                    </div>
+            
+                </div> <!-- end div row -->
+            
+            </form>
+        </div>
+
         <!-- MAP CONTAINER -->
-        <div id="map-container" class="row">
+        <div id="map-container">
 
             <!-- SG MAP -->
-            <div id="sgmap">
-                
-                <!-- Search Form-->
-                <div class="search-container shadow position-absolute top-0 start-50 translate-middle-x bg-white mt-4 p-2 rounded-3">
-                    <form>
-                        <div class="row d-flex px-3">
-                            <div class="col-lg-3 py-1 d-flex align-items-center form-group">
-                                <div class="icon">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
-                            </div>
-                    
-                            <div class="col-lg-3 py-1 d-flex align-items-center form-group">
-                                <div class="icon"><i class="fa-solid fa-building"></i></div>
-                                <select id="category-input" class="form-select border-0">
-                                    <option selected>Category</option>
-                                    <option value="1">Co-working Space</option>
-                                    <option value="2">Meeting Room</option>
-                                </select>
-                            </div>
-                    
-                            <div class="col-lg-3 py-1 d-flex align-items-center form-group">
-                                <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-                                <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
-                                <datalist id="datalistOptions">
-                                    <option value="Ang Mo Kio">
-                                    <option value="Bedok">
-                                    <option value="Bishan">
-                                    <option value="Boon Lay">
-                                    <option value="Bukit Batok">
-                                    <option value="Bukit Panjang">
-                                    <option value="Bukit Timah">
-                                    <option value="Changi">
-                                    <option value="Choa Chu Kang">
-                                    <option value="City Hall">
-                                    <option value="Clementi">
-                                    <option value="Downtown">
-                                    <option value="Geylang">
-                                    <option value="Hougang">
-                                    <option value="Jurong East">
-                                    <option value="Jurong West">
-                                    <option value="Kallang">
-                                    <option value="Marina East">
-                                    <option value="Marina South">
-                                    <option value="Newton">
-                                    <option value="Novena">
-                                    <option value="Orchard">
-                                </datalist>
-                            </div>
-                    
-                            <div class="col-lg-3 p-2 d-grid">
-                                <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
-                            </div>
-                    
-                        </div> <!-- end div row -->
-                    
-                    </form>
-                </div>
-                
-            </div>
+            <div id="sgmap"></div>
 
-            <!-- Search Results Tab -->
-            <div id="results-container" class="shadow">
+            <!-- Search Results Panel -->
+            <div id="results-container">
 
                 <div id="results-header">
                     <h5 id="results-title" class="lead py-3"></h5>

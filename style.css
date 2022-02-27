@@ -5,23 +5,19 @@
 }
 
 #container {
-    overflow: hidden;
-}
-
-/* MAP */
-#map-container {
-    height: 100vh;
+    box-sizing: border-box;
     position: relative;
-}
-
-#sgmap {
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    /* overflow: hidden; */
 }
 
 /* SEARCH */
 .search-container {
-    width: 80%;
-    z-index: 314159;
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 314170;
 }
   
 .icon {
@@ -30,9 +26,20 @@
 
 #search-bar {
     background: white;
-    border-radius: 6px; 
 }
 
+/* MAP */
+#map-container {
+    width: 100%;
+    height: 100%;
+}
+
+#sgmap {
+    width: 100%;
+    height: 100%;
+}
+
+/* RESULTS */
 #results-container {
     position: absolute;
     overflow: scroll;
@@ -50,18 +57,29 @@
 
 /* For Desktop */
 @media screen and (min-width: 768px) {
+    #container {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .search-container {
+        position: initial;
+    }
+
     #map-container {
         display: flex;
         flex-direction: row;
-        height: 98vh;
-        padding-top: 16px;
+        overflow: hidden;
     }
+
     #sgmap {
         width: 70%;
     }
+
     #results-container {
         position: initial;
         width: 30%;
-        height: 100% !important;
+        height: 100%;
     }
 }
