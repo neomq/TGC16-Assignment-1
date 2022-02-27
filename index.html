@@ -31,58 +31,69 @@
 <body>
     <div id="container">
 
-        <!-- Search Form-->
-        <div class="search-container shadow bg-white p-2">
-            <form>
-                <div class="row d-flex px-3">
-                    <div class="col-lg-3 py-1 d-flex align-items-center form-group">
-                        <div class="icon">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+        <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow p-3">
+            <div class="container-fluid">
+        
+                <!-- Back button -->
+                
+                    <button type="button" id="back-btn" class="btn">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                
+        
+                <!-- Nav bar toggler -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                
+                <!-- collapse -->
+                <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <!-- Search Form -->
+                    <form class="d-flex justify-content-center mt-3 mt-lg-0">
+                        <div class="row col-lg-10 d-flex">
+        
+                            <!-- Search Keyword -->
+                            <div id="keyword-box" class="d-flex align-items-center col-lg-4 py-1 form-group">
+                                <div class="searchbar-icon px-2">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <input id="search-input" class="form-control bg-transparent border-0" type="text" name="search"
+                                    placeholder="Search by Keyword i.e Wework">
+                            </div>
+                            
+                            <!-- Search Location -->
+                            <div id="location-box" class="d-flex align-items-center col-lg-3 py-1 mt-2 mt-lg-0 ms-lg-3 form-group">
+                                <div class="searchbar-icon px-2"><i class="fa-solid fa-location-dot"></i></div>
+                                <input class="form-control bg-transparent border-0" list="datalistOptions" id="location-input"
+                                    placeholder="Search Area">
+                                <datalist id="datalistOptions">
+                                    <option value="Ang Mo Kio">
+                                    <option value="Bishan">
+                                    <option value="Clementi">
+                                    <option value="Orchard">
+                                    <option value="Raffles City">
+                                </datalist>
+                            </div>
+        
+                            <!-- Search Button -->
+                            <div class="col-lg-2 ms-lg-3 d-grid p-0 py-lg-1 my-2 my-lg-0">
+                                <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
+                            </div>
+        
                         </div>
-                        <input id="search-input" class="form-control border-0" type="text" name="search" placeholder="Search keyword">
-                    </div>
-            
-                    <div class="col-lg-3 py-1 d-flex align-items-center form-group">
-                        <div class="icon"><i class="fa-solid fa-building"></i></div>
-                        <select id="category-input" class="form-select border-0">
-                            <option selected>Category</option>
-                            <option value="1">Co-working Space</option>
-                            <option value="2">Meeting Room</option>
-                        </select>
-                    </div>
-            
-                    <div class="col-lg-3 py-1 d-flex align-items-center form-group">
-                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <input class="form-control border-0" list="datalistOptions" id="location-input" placeholder="Nearby">
-                        <datalist id="datalistOptions">
-                            <option value="Ang Mo Kio">
-                            <option value="Bedok">
-                            <option value="Bishan">
-                            <option value="Boon Lay">
-                            <option value="Bukit Batok">
-                            <option value="Bukit Panjang">
-                            <option value="Bukit Timah">
-                            <option value="Changi">
-                            <option value="Choa Chu Kang">
-                            <option value="City Hall">
-                            <option value="Clementi">
-                        </datalist>
-                    </div>
-            
-                    <div class="col-lg-3 p-2 d-grid">
-                        <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
-                    </div>
-            
-                </div> <!-- end div row -->
-            
-            </form>
-        </div>
+                    </form>
+                </div>
+
+            </div>
+        </nav>
 
         <!-- MAP CONTAINER -->
         <div id="map-container">
 
             <!-- SG MAP -->
-            <div id="sgmap"></div>
+            <div id="sgmap">
+            </div>
 
             <!-- Search Results Panel -->
             <div id="results-container">
@@ -98,6 +109,7 @@
             </div>
 
         </div>
+
     </div>
     
     <!-- Leaflet JS -->
@@ -126,5 +138,6 @@
 
     <!-- Script JS -->
     <script src="script.js"></script>
+
 </body>
 </html>

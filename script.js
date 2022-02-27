@@ -5,9 +5,8 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
-        // Map search result layer for the markers
-        let markerSearchResultLayer = L.layerGroup();
-        markerSearchResultLayer.addTo(mapObject);
+        // create marker cluster layer
+        let markerClusterLayer = L.markerClusterGroup();
 
         window.addEventListener('DOMContentLoaded', function(){
             // add event listeners here...
@@ -15,38 +14,46 @@ async function main(){
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
+                // auto-click navbar-toggler on mobile to collapse search bar
+                let mediaQuery = window.matchMedia('(max-width: 991px)')
+                // if the media query is true
+                if (mediaQuery.matches) {
+                    // trigger auto-click
+                    document.querySelector(".navbar-toggler").click();
+                }
+
                 // clear prior search markers
-                markerSearchResultLayer.clearLayers();
+                markerClusterLayer.clearLayers();
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
                 
                 // get place search value
                 let keyword = "";
-                let category = "";
                 let location = "";
                 
                 let searchValue = document.querySelector("#search-input").value;
-                let catValue = document.querySelector("#category-input").value;
                 let locationValue = document.querySelector("#location-input").value;
                 
                 if (searchValue){ keyword = searchValue; }
-                if (catValue === "1") {
-                    category = "11128"; // working space
-                } else if (catValue === "2") {
-                    category = "11129"; // meeting rooms
-                } else {
-                    category = "11128, 11129"; // search all working space and meeting rooms
-                }
                 if (locationValue){ location = document.querySelector("#location-input").value; }
-                let near = `${location},Singapore` // string seperated by comma
+                let near = `${location}, Singapore` // string seperated by comma
 
-                let response1 = await search(keyword, category, near);
+                let response1 = await search(keyword, near);
+                console.log("search: ", keyword, "near ", near)
                 console.log(response1);
 
-                // display number of search results
+                // display search summary and number of search results
                 let resultsNumber = response1.results.length;
-                document.querySelector('#results-title').innerHTML = `${resultsNumber} results`;
-
+                if (keyword && location) {
+                    document.querySelector('#results-title').innerHTML = `${resultsNumber} results for ${keyword} near ${near}`;
+                } else if (keyword && !location) {
+                    document.querySelector('#results-title').innerHTML = `${resultsNumber} results for ${keyword} in Singapore`;
+                } else if (location && !keyword) {
+                    document.querySelector('#results-title').innerHTML = `${resultsNumber} results near ${near}`;
+                } else {
+                    document.querySelector('#results-title').innerHTML = `Suggested Co-working Spaces in Singapore`;
+                }
+                
                 // map markers
                 for (let eachResult of response1.results){
                     let lat = eachResult.geocodes.main.latitude;
@@ -57,27 +64,41 @@ async function main(){
                     let searchMarker = L.marker(coordinates);
 
                     // get photos fsq_id from results
-                    let photoFsqid = eachResult.fsq_id;
+                    let fsqid = eachResult.fsq_id;
                     // get place photo from foursquare
-                    let response2 = await searchPhotos(photoFsqid);
+                    let response2 = await searchPhotos(fsqid);
                     // console.log(response2);
                     let photoUrl = "";
                     if (response2[0]) {
                         let prefix = response2[0].prefix;
                         let suffix = response2[0].suffix;
-                        photoUrl = prefix + '192x144' + suffix;
+                        photoUrl = prefix + '200x150' + suffix;
                     }
 
-                    // create popup
-                    searchMarker.bindPopup(`<img src="${photoUrl}">
-                                            <h6>${eachResult.name}</h6>`);
-                    searchMarker.addTo(markerSearchResultLayer);
+                    // create popup content
+                    let popupContent = document.createElement('div');
+                    popupContent.className = 'py-1';
+
+                    let popupTitle = document.createElement('h6');
+                    popupTitle.className = 'mt-2';
+                    popupTitle.innerHTML = eachResult.name;
+
+                    let popupPhoto = `<img src="${photoUrl}" alt="">`;
+
+                    popupContent.appendChild(popupTitle);
+                    popupContent.innerHTML += popupPhoto;
+
+                    // add popup content to marker
+                    searchMarker.bindPopup(popupContent, {maxWidth: 200});
                     
+                    searchMarker.addTo(markerClusterLayer); // add markers to marker cluster layer
+                    markerClusterLayer.addTo(mapObject); // add marker cluster layer to map
+
                     let searchResultElement = document.querySelector('#search-results');
 
                     // append search results to searchResultElement
                     let resultElement = document.createElement('div');
-                    resultElement.className = 'search-result card mb-3 p-2 shadow-sm';
+                    resultElement.className = 'search-result card mb-3 p-2';
 
                     let resultElementCard = document.createElement('div');
                     resultElementCard.className = 'card-body';
@@ -85,16 +106,21 @@ async function main(){
                     let resultTitle = document.createElement('h6');
                     resultTitle.className = 'card-title';
 
+                    let resultCat = document.createElement('p');
+                    resultCat.className = 'card-category lead fs-6';
+
                     let resultText = document.createElement('p');
                     resultText.className = 'card-text text-muted';
 
                     resultTitle.innerHTML = eachResult.name;
-                    resultText.innerHTML = eachResult.location.formatted_address;
+                    resultCat.innerHTML = eachResult.categories[0].name; // for self-reference only
+                    resultText.innerHTML += eachResult.location.formatted_address;
                     
                     // append child
                     searchResultElement.appendChild(resultElement);
                     resultElement.appendChild(resultElementCard);
                     resultElementCard.appendChild(resultTitle);
+                    resultElementCard.appendChild(resultCat);
                     resultElementCard.appendChild(resultText);
 
                     // Event listener to resultElement
@@ -107,7 +133,10 @@ async function main(){
 
                     // auto-click to zoom to first search result location
                     document.querySelector('.search-result').click();
+
                 }
+
+
             })
 
         })
