@@ -9,7 +9,6 @@ async function main(){
         let markerClusterLayer = L.markerClusterGroup();
 
         window.addEventListener('DOMContentLoaded', function(){
-            // add event listeners here...
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
@@ -63,6 +62,9 @@ async function main(){
                     // create marker
                     let searchMarker = L.marker(coordinates);
 
+                    // get place address from results
+                    let address = eachResult.location.formatted_address;
+
                     // get photos fsq_id from results
                     let fsqid = eachResult.fsq_id;
                     // get place photo from foursquare
@@ -97,6 +99,10 @@ async function main(){
 
                     let popupPhoto = `<img src="${photoUrl}" alt="">`;
 
+                    let popupAddress = document.createElement('p');
+                    popupAddress.className = 'fs-6';
+                    popupAddress.innerHTML = address;
+
                     popupContent.appendChild(popupTitle);
                     popupContent.innerHTML += popupPhoto;
 
@@ -104,7 +110,6 @@ async function main(){
                     searchMarker.bindPopup(popupContent, {maxWidth: 200});
                     
                     searchMarker.addTo(markerClusterLayer); // add markers to marker cluster layer
-                    markerClusterLayer.addTo(mapObject); // add marker cluster layer to map
 
                     let searchResultElement = document.querySelector('#search-results');
 
@@ -128,7 +133,7 @@ async function main(){
 
                     resultTitle.innerHTML = eachResult.name;
                     resultHours.innerHTML = openingHours;
-                    resultLocation.innerHTML += eachResult.location.formatted_address;
+                    resultLocation.innerHTML += address;
                     resultWeb.innerHTML = `<a href="${website}" class="link-primary">${website}</a>`;
                     
                     // append child
@@ -139,20 +144,19 @@ async function main(){
                     resultElementCard.appendChild(resultLocation);
                     resultElementCard.appendChild(resultWeb);
 
-
                     // Event listener to resultElement
                     resultElement.addEventListener('click', function(){
                         // zoom to the location on map
-                        mapObject.flyTo(coordinates, 16); // check out leaflet documentation - map methods for modifying map state
-                        searchMarker.openPopup();
+                        mapObject.flyTo(coordinates, 18); // check out leaflet documentation - map methods for modifying map state
+                        setTimeout( function(){
+                            searchMarker.openPopup();
+                        }, 4000 )
+                        
                     })
-
                     // auto-click first search result location
-                    document.querySelector('.search-result').click();
-
+                    // document.querySelector('.search-result').click();
                 }
-
-
+                markerClusterLayer.addTo(mapObject); // add marker cluster layer to map
             })
 
         })
