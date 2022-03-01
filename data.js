@@ -18,7 +18,7 @@ async function search(keyword, near){
         }
     })
     return response1.data;
-}
+};
 
 // search photos
 async function searchPhotos(fsq_id){
@@ -32,7 +32,7 @@ async function searchPhotos(fsq_id){
         }
     })
     return response2.data;
-}
+};
 
 // search place details
 async function searchPlaceDetails(fsq_id){
@@ -46,4 +46,4 @@ async function searchPlaceDetails(fsq_id){
         }
     })
     return response3.data;
-}
+};

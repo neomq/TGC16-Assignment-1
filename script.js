@@ -5,10 +5,54 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
-        // create marker cluster layer
-        let markerClusterLayer = L.markerClusterGroup();
+        // create marker result layer
+        let searchResultLayer = L.layerGroup();
 
-        window.addEventListener('DOMContentLoaded', function(){
+        // load MRT station exit data
+        async function loadHawkerCentres() {
+            let response = await axios.get('data/hawker-centres.geojson');
+
+            let hawkerName = "";
+            let hawkerStatus = "";
+            let hawkerAddress = "";
+            let dummyDiv = document.createElement('div');
+
+            let hawkerLayer = L.geoJson(response.data, {
+
+                filter: function (feature) {
+                    dummyDiv.innerHTML = feature.properties.Description;
+                    
+                    let columns = dummyDiv.querySelectorAll('td');
+                    hawkerStatus = columns[3].innerHTML;
+                    
+                    if (hawkerStatus === "Existing") return true;
+                    if (hawkerStatus === "Existing (new)") return true;
+                },
+                onEachFeature: function (feature, layer) {
+                    dummyDiv.innerHTML = feature.properties.Description;
+                    let columns = dummyDiv.querySelectorAll('td');
+                    hawkerName = columns[19].innerHTML;
+                    hawkerStatus = columns[3].innerHTML;
+                    hawkerAddress = columns[29].innerHTML;
+
+                    layer.bindPopup(`<div>
+                                        <ul>
+                                            <li>${hawkerName}</li>
+                                            <li>${hawkerStatus}</li>
+                                            <li>${hawkerAddress}</li>
+                                        </ul>
+                                    </div>`);
+
+                    console.log(hawkerStatus);
+                }
+
+            }).addTo(mapObject);
+            return hawkerLayer;
+        }; 
+
+        window.addEventListener('DOMContentLoaded', async function(){
+
+            await loadHawkerCentres();
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
@@ -22,7 +66,8 @@ async function main(){
                 }
 
                 // clear prior search markers
-                markerClusterLayer.clearLayers();
+                searchResultLayer.clearLayers();
+
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
                 
@@ -62,12 +107,12 @@ async function main(){
                     // create marker
                     let searchMarker = L.marker(coordinates);
 
-                    // get place address from results
+                    // get address from results
                     let address = eachResult.location.formatted_address;
 
-                    // get photos fsq_id from results
+                    // get fsq_id from results
                     let fsqid = eachResult.fsq_id;
-                    // get place photo from foursquare
+                    // get photos
                     let response2 = await searchPhotos(fsqid);
                     // console.log(response2);
                     let photoUrl = "";
@@ -77,16 +122,20 @@ async function main(){
                         photoUrl = prefix + '200x150' + suffix;
                     }
 
-                    // get place details from results
+                    // get place information
                     let response3 = await searchPlaceDetails(fsqid);
                     // console.log(response3);
+                    // get website
                     let website = "";
                     if (response3.website) {
                         website = response3.website;
                     }
+                    // get opening hours
                     let openingHours = "";
                     if (response3.hours.display) {
                         openingHours = response3.hours.display;
+                    } else {
+                        openingHours = "No Opening Hours Available";
                     }
                     
                     // create popup content
@@ -109,11 +158,11 @@ async function main(){
                     // add popup content to marker
                     searchMarker.bindPopup(popupContent, {maxWidth: 200});
                     
-                    searchMarker.addTo(markerClusterLayer); // add markers to marker cluster layer
-
-                    let searchResultElement = document.querySelector('#search-results');
+                    // add marker to search layer
+                    searchMarker.addTo(searchResultLayer);
 
                     // append search results to searchResultElement
+                    let searchResultElement = document.querySelector('#search-results');
                     let resultElement = document.createElement('div');
                     resultElement.className = 'search-result card mb-3 p-2';
 
@@ -136,7 +185,6 @@ async function main(){
                     resultLocation.innerHTML += address;
                     resultWeb.innerHTML = `<a href="${website}" class="link-primary">${website}</a>`;
                     
-                    // append child
                     searchResultElement.appendChild(resultElement);
                     resultElement.appendChild(resultElementCard);
                     resultElementCard.appendChild(resultTitle);
@@ -148,25 +196,20 @@ async function main(){
                     resultElement.addEventListener('click', function(){
                         // zoom to the location on map
                         mapObject.flyTo(coordinates, 18); // check out leaflet documentation - map methods for modifying map state
-                        setTimeout( function(){
-                            searchMarker.openPopup();
-                        }, 4000 )
-                        
+                        searchMarker.openPopup();
                     })
                     // auto-click first search result location
                     // document.querySelector('.search-result').click();
                 }
-                markerClusterLayer.addTo(mapObject); // add marker cluster layer to map
-            })
 
+                searchResultLayer.addTo(mapObject);
+            })
         })
 
         // Map Setup
         function initMap() {
             let singapore = [1.29, 103.85];
-            let mapObject = L.map('sgmap',{ zoomControl: false}).setView(singapore, 13); //disable zoomControl when initializing map
-            // change position of zoom control
-            L.control.zoom({position:'bottomright'}).addTo(mapObject);
+            let mapObject = L.map('sgmap').setView(singapore, 13); //disable zoomControl when initializing map
 
             // Tile layers boilerplate
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -180,7 +223,6 @@ async function main(){
 
             return mapObject;
         }
-
     }
     init();
 }
