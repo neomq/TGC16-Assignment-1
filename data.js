@@ -1,9 +1,8 @@
 const API_BASE_URL="https://api.foursquare.com/v3";
-const API_KEY="fsq39KAcQFbTaS1UcZfkT7ZQAkGv7nIP4Wtkhziu4dcLibg=";
+const API_KEY="fsq37HsGhtAikS5rE/pwAin+2fHwBvi5XSwQ54Cz8af+bVk=";
 
 // search
 async function search(keyword, near){
-
     let response1 = await axios.get(API_BASE_URL + '/places/search', {
         params: {
             'query': keyword,
@@ -46,4 +45,24 @@ async function searchPlaceDetails(fsq_id){
         }
     })
     return response3.data;
+};
+
+// search nearby food and dining from foursquare places
+async function searchNearFood(ll){
+
+    let response4 = await axios.get(API_BASE_URL + '/places/search', {
+        params: {
+            'll': ll,
+            'radius': '150', //metres,
+            'categories': '13000,13032,13034,13035,13037,13052,13065,13145',
+            'sort': 'distance',
+            'limit': 20,
+            'v': '02272022'
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': API_KEY
+        }
+    })
+    return response4.data;
 };

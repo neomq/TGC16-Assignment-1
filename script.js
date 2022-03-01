@@ -5,10 +5,12 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
-        // create marker result layer
+        // create result layers
         let searchResultLayer = L.layerGroup();
+        let hawkerFoodLayer = L.layerGroup();
+        let restaurantFoodLayer = L.layerGroup();
 
-        // load MRT station exit data
+        // load Hawker Centres Data
         async function loadHawkerCentres() {
             let response = await axios.get('data/hawker-centres.geojson');
 
@@ -25,6 +27,7 @@ async function main(){
                     let columns = dummyDiv.querySelectorAll('td');
                     hawkerStatus = columns[3].innerHTML;
                     
+                    // display all that are currently existing (not under construction)
                     if (hawkerStatus === "Existing") return true;
                     if (hawkerStatus === "Existing (new)") return true;
                 },
@@ -32,27 +35,29 @@ async function main(){
                     dummyDiv.innerHTML = feature.properties.Description;
                     let columns = dummyDiv.querySelectorAll('td');
                     hawkerName = columns[19].innerHTML;
-                    hawkerStatus = columns[3].innerHTML;
+                    // hawkerStatus = columns[3].innerHTML; // for checking only
                     hawkerAddress = columns[29].innerHTML;
 
                     layer.bindPopup(`<div>
                                         <ul>
                                             <li>${hawkerName}</li>
-                                            <li>${hawkerStatus}</li>
                                             <li>${hawkerAddress}</li>
                                         </ul>
                                     </div>`);
-
-                    console.log(hawkerStatus);
                 }
 
-            }).addTo(mapObject);
+            }).addTo(hawkerFoodLayer);
             return hawkerLayer;
         }; 
 
         window.addEventListener('DOMContentLoaded', async function(){
 
             await loadHawkerCentres();
+
+            let overlays = {
+                'Hawkers': hawkerFoodLayer
+            }
+            L.control.layers(overlays).addTo(mapObject);
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
@@ -112,6 +117,7 @@ async function main(){
 
                     // get fsq_id from results
                     let fsqid = eachResult.fsq_id;
+
                     // get photos
                     let response2 = await searchPhotos(fsqid);
                     // console.log(response2);
@@ -120,11 +126,12 @@ async function main(){
                         let prefix = response2[0].prefix;
                         let suffix = response2[0].suffix;
                         photoUrl = prefix + '200x150' + suffix;
-                    }
+                    } 
 
                     // get place information
                     let response3 = await searchPlaceDetails(fsqid);
                     // console.log(response3);
+
                     // get website
                     let website = "";
                     if (response3.website) {
@@ -137,6 +144,21 @@ async function main(){
                     } else {
                         openingHours = "No Opening Hours Available";
                     }
+
+                    // get nearby food and dining info 
+                    let ll = `${lat},${lng}`;
+                    let response4 = await searchNearFood(ll);
+                    //console.log(response4);
+                    let nearFood = "";
+                    let foodArray = [];
+                    let searchNearbyFood;
+                    for (let eachFoodResult of response4.results){
+                        nearFood = eachFoodResult.name;
+                        searchNearbyFood = L.marker([eachFoodResult.geocodes.main.latitude,eachFoodResult.geocodes.main.longitude]);
+                        searchNearbyFood.bindPopup(`<div>${nearFood}</div>`);
+                        searchNearbyFood.addTo(restaurantFoodLayer);
+                        foodArray.push(nearFood);
+                    }                    
                     
                     // create popup content
                     let popupContent = document.createElement('div');
@@ -149,11 +171,18 @@ async function main(){
                     let popupPhoto = `<img src="${photoUrl}" alt="">`;
 
                     let popupAddress = document.createElement('p');
-                    popupAddress.className = 'fs-6';
+                    popupAddress.className = 'fs-6 text-muted mt-1 mb-2';
                     popupAddress.innerHTML = address;
 
+                    let popupLatLng = document.createElement('p'); // for checking only
+                    popupLatLng.innerHTML = `${lat},${lng}`; // for checking only
+                    
                     popupContent.appendChild(popupTitle);
-                    popupContent.innerHTML += popupPhoto;
+                    if (photoUrl !== ""){
+                        popupContent.innerHTML += popupPhoto;
+                    };
+                    popupContent.appendChild(popupAddress);
+                    popupContent.appendChild(popupLatLng);
 
                     // add popup content to marker
                     searchMarker.bindPopup(popupContent, {maxWidth: 200});
@@ -195,7 +224,7 @@ async function main(){
                     // Event listener to resultElement
                     resultElement.addEventListener('click', function(){
                         // zoom to the location on map
-                        mapObject.flyTo(coordinates, 18); // check out leaflet documentation - map methods for modifying map state
+                        mapObject.flyTo(coordinates, 18);
                         searchMarker.openPopup();
                     })
                     // auto-click first search result location
@@ -203,6 +232,7 @@ async function main(){
                 }
 
                 searchResultLayer.addTo(mapObject);
+                restaurantFoodLayer.addTo(mapObject);
             })
         })
 
