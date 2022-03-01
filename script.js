@@ -1,3 +1,10 @@
+// To Do
+// - cluster food layer
+// - Add details to food popup
+// - Add geojson (mrt?)
+// - Add search filter (show only first 5 results, hide the rest)
+
+
 // Main function
 async function main(){
 
@@ -7,57 +14,15 @@ async function main(){
 
         // create result layers
         let searchResultLayer = L.layerGroup();
-        let hawkerFoodLayer = L.layerGroup();
         let restaurantFoodLayer = L.layerGroup();
 
-        // load Hawker Centres Data
-        async function loadHawkerCentres() {
-            let response = await axios.get('data/hawker-centres.geojson');
+        let overlays = {
+            'Nearby food': restaurantFoodLayer
+        }
 
-            let hawkerName = "";
-            let hawkerStatus = "";
-            let hawkerAddress = "";
-            let dummyDiv = document.createElement('div');
-
-            let hawkerLayer = L.geoJson(response.data, {
-
-                filter: function (feature) {
-                    dummyDiv.innerHTML = feature.properties.Description;
-                    
-                    let columns = dummyDiv.querySelectorAll('td');
-                    hawkerStatus = columns[3].innerHTML;
-                    
-                    // display all that are currently existing (not under construction)
-                    if (hawkerStatus === "Existing") return true;
-                    if (hawkerStatus === "Existing (new)") return true;
-                },
-                onEachFeature: function (feature, layer) {
-                    dummyDiv.innerHTML = feature.properties.Description;
-                    let columns = dummyDiv.querySelectorAll('td');
-                    hawkerName = columns[19].innerHTML;
-                    // hawkerStatus = columns[3].innerHTML; // for checking only
-                    hawkerAddress = columns[29].innerHTML;
-
-                    layer.bindPopup(`<div>
-                                        <ul>
-                                            <li>${hawkerName}</li>
-                                            <li>${hawkerAddress}</li>
-                                        </ul>
-                                    </div>`);
-                }
-
-            }).addTo(hawkerFoodLayer);
-            return hawkerLayer;
-        }; 
+        L.control.layers(overlays).addTo(mapObject);
 
         window.addEventListener('DOMContentLoaded', async function(){
-
-            await loadHawkerCentres();
-
-            let overlays = {
-                'Hawkers': hawkerFoodLayer
-            }
-            L.control.layers(overlays).addTo(mapObject);
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
@@ -72,6 +37,7 @@ async function main(){
 
                 // clear prior search markers
                 searchResultLayer.clearLayers();
+                restaurantFoodLayer.clearLayers();
 
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
