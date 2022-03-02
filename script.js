@@ -12,7 +12,7 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
-        // Load gyms data from geojson
+        // Load gyms
         async function loadGyms() {
             let response = await axios.get('data/gyms.geojson');
 
@@ -42,26 +42,91 @@ async function main(){
 
             return gymsLayer;
         }
+
+        // Load smoking area
+        async function loadSmoking() {
+            let response = await axios.get('data/smoking.geojson');
+
+            let smokingLayer = L.geoJson(response.data, {
+                onEachFeature: function (feature, layer) {
+                    // console.log(feature.properties)
+                    layer.bindPopup(feature.properties.Description);
+
+                    let dummyDiv = document.createElement('div');
+                    dummyDiv.innerHTML = feature.properties.Description;
+                    let columns = dummyDiv.querySelectorAll('td');
+
+                    let smokeArea = columns[1].innerHTML;
+                    let smokeDescription = columns[0].innerHTML;
+
+                    layer.bindPopup(`<div>
+                                        <ul>
+                                            <li>${smokeArea}</li>
+                                            <li>${smokeDescription}</li>
+                                        </ul>
+                                    </div>`);
+                }
+            }).addTo(smokeLayerGroup);
+
+            return smokingLayer;
+        }
+
+        // Load supermarkets
+        async function loadSupermarkets() {
+            let response = await axios.get('data/supermarkets.geojson');
+
+            let supermarketLayer = L.geoJson(response.data, {
+                onEachFeature: function (feature, layer) {
+                    // console.log(feature.properties)
+                    layer.bindPopup(feature.properties.Description);
+
+                    let dummyDiv = document.createElement('div');
+                    dummyDiv.innerHTML = feature.properties.Description;
+                    let columns = dummyDiv.querySelectorAll('td');
+
+                    let supermarketName = columns[0].innerHTML;
+                    let supermarketBlk = columns[1].innerHTML;
+                    let supermarketStreet = columns[2].innerHTML;
+                    let supermarketPostCode = columns[4].innerHTML;
+
+                    layer.bindPopup(`<div>
+                                        <ul>
+                                            <li>${supermarketName}</li>
+                                            <li>${supermarketBlk}</li>
+                                            <li>${supermarketStreet}</li>
+                                            <li>${supermarketPostCode}</li>
+                                        </ul>
+                                    </div>`);
+                }
+            }).addTo(supermarketsLayer);
+
+            return supermarketLayer;
+        }
        
-        // create result layers
+        // create map layers
         let searchResultLayer = L.layerGroup();
         let restaurantFoodLayer = L.layerGroup();
-        let gymLayerGroup = L.layerGroup();
+        let gymLayerGroup = L.layerGroup(); 
+        let smokeLayerGroup = L.layerGroup(); 
+        let supermarketsLayer = L.layerGroup();
 
         let baseLayers = {
             
         }
         let overlays = {
             'Nearby Food & Dining': restaurantFoodLayer,
-            'Gyms': gymLayerGroup
+            'Gyms': gymLayerGroup,
+            'Designated Smoking areas': smokeLayerGroup,
+            'Supermarkets': supermarketsLayer
         }
 
-        L.control.layers(baseLayers, overlays).addTo(mapObject);
-
+        L.control.layers(baseLayers, overlays, {position: 'topleft'}).addTo(mapObject);
 
         window.addEventListener('DOMContentLoaded', async function(){
 
             loadGyms();
+            loadSmoking();
+            loadSupermarkets();
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
