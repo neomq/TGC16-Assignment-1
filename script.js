@@ -116,6 +116,17 @@ async function main(){
 
         L.control.layers(baseLayers, overlays, {position: 'topleft'}).addTo(mapObject);
 
+        // create custom markers
+        const workspaceMarker = L.icon({
+            iconUrl: 'images/csmapmarker.png',
+            shadowUrl: 'images/csmapmarker-shadow.png',
+            iconSize: [32, 37],
+            shadowSize: [42, 47],
+            iconAnchor: [14, 0],
+            shadowAnchor: [17, 6],
+            popupAnchor: [0, 0]
+        });
+
         window.addEventListener('DOMContentLoaded', async function(){
 
             loadGyms();
@@ -158,19 +169,20 @@ async function main(){
                 // display search summary and number of search results
                 let resultsNumber = response1.results.length;
                 if (keyword && location) {
-                    document.querySelector('#results-title').innerHTML = `${resultsNumber} results for ${keyword} near ${near}`;
+                    document.querySelector('#results-title').innerHTML = `Search results for ${keyword} near ${near}`;
+                    document.querySelector('#results-number').innerHTML = `${resultsNumber} results`;
                 } else if (keyword && !location) {
-                    document.querySelector('#results-title').innerHTML = `${resultsNumber} results for ${keyword} in Singapore`;
+                    document.querySelector('#results-title').innerHTML = `Search results for ${keyword} in Singapore`;
+                    document.querySelector('#results-number').innerHTML = `${resultsNumber} results`;
                 } else if (location && !keyword) {
-                    document.querySelector('#results-title').innerHTML = `${resultsNumber} results near ${near}`;
+                    document.querySelector('#results-title').innerHTML = `Search results near ${near}`;
+                    document.querySelector('#results-number').innerHTML = `${resultsNumber} results`;
                 } else {
                     document.querySelector('#results-title').innerHTML = `Suggested Co-working Spaces in Singapore`;
                 }
                 
                 // display results filter
                 document.querySelector('#results-filter').style.display = "block";
-                document.querySelector('#filter-icon').style.display = "block";
-                document.querySelector('#filter-btn').style.display = "block";
 
                 // map markers
                 for (let eachResult of response1.results){
@@ -179,7 +191,7 @@ async function main(){
                     let coordinates = [lat,lng];
 
                     // create marker
-                    let searchMarker = L.marker(coordinates);
+                    let searchMarker = L.marker(coordinates, {icon:workspaceMarker});
 
                     // get address from results
                     let address = eachResult.location.formatted_address;
@@ -324,7 +336,8 @@ async function main(){
             let mapObject = L.map('sgmap').setView(singapore, 13);
 
             // Tile layers boilerplate
-            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            // 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}'
+            L.tileLayer('https://api.mapbox.com/styles/v1/mqneo/cl09ur8r9004016mqo7v9bx8b/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibXFuZW8iLCJhIjoiY2wwOXVoZHdrMGgwbzNrbnRrZWlycDh6MSJ9.1Xpvf-vfkPdh_0yvX9kgOw', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox/streets-v11',
