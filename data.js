@@ -53,7 +53,7 @@ async function searchNearFood(ll){
     let response4 = await axios.get(API_BASE_URL + '/places/search', {
         params: {
             'll': ll,
-            'radius': '150', //metres,
+            'radius': '200', // was 150
             'categories': '13000,13032,13034,13035,13037,13052,13065,13145',
             'sort': 'distance',
             'limit': 20,

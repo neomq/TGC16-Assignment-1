@@ -1,8 +1,7 @@
 // To Do
 // - cluster food layer
 // - Add details to food popup
-// - Add geojson (mrt?)
-// - Add search filter (show only first 5 results, hide the rest)
+// - Add search filter (show only first 5 results hide the rest?)
 // - user location
 
 // Main function
@@ -105,16 +104,17 @@ async function main(){
        
         // create map layers
         let searchResultLayer = L.layerGroup();
-        let restaurantFoodLayer = L.layerGroup();
-        let gymLayerGroup = L.layerGroup(); 
-        let smokeLayerGroup = L.layerGroup(); 
-        let supermarketsLayer = L.layerGroup();
+
+        let nearbyFoodLayer = L.markerClusterGroup(); 
+        let gymLayerGroup = L.markerClusterGroup(); 
+        let smokeLayerGroup = L.markerClusterGroup(); 
+        let supermarketsLayer = L.markerClusterGroup(); 
 
         let baseLayers = {
             
         }
         let overlays = {
-            'Nearby Food & Dining': restaurantFoodLayer,
+            'Nearby Food & Dining': nearbyFoodLayer,
             'Gyms': gymLayerGroup,
             'Designated Smoking areas': smokeLayerGroup,
             'Supermarkets': supermarketsLayer
@@ -141,7 +141,7 @@ async function main(){
 
                 // clear prior search markers
                 searchResultLayer.clearLayers();
-                restaurantFoodLayer.clearLayers();
+                nearbyFoodLayer.clearLayers();
 
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
@@ -226,7 +226,7 @@ async function main(){
                         nearFood = eachFoodResult.name;
                         searchNearbyFood = L.marker([eachFoodResult.geocodes.main.latitude,eachFoodResult.geocodes.main.longitude]);
                         searchNearbyFood.bindPopup(`<div>${nearFood}</div>`);
-                        searchNearbyFood.addTo(restaurantFoodLayer);
+                        searchNearbyFood.addTo(nearbyFoodLayer);
                         foodArray.push(nearFood);
                     }                    
                     
@@ -302,7 +302,7 @@ async function main(){
                 }
 
                 searchResultLayer.addTo(mapObject);
-                restaurantFoodLayer.addTo(mapObject);
+                nearbyFoodLayer.addTo(mapObject);
             })
         })
 
