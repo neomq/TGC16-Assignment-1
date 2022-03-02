@@ -3,7 +3,7 @@
 // - Add details to food popup
 // - Add geojson (mrt?)
 // - Add search filter (show only first 5 results, hide the rest)
-
+// - user location
 
 // Main function
 async function main(){
@@ -12,17 +12,56 @@ async function main(){
     function init(){
         let mapObject = initMap();
 
+        // Load gyms data from geojson
+        async function loadGyms() {
+            let response = await axios.get('data/gyms.geojson');
+
+            let gymsLayer = L.geoJson(response.data, {
+                onEachFeature: function (feature, layer) {
+                    console.log(feature.properties)
+                    layer.bindPopup(feature.properties.Description);
+
+                    let dummyDiv = document.createElement('div');
+                    dummyDiv.innerHTML = feature.properties.Description;
+                    let columns = dummyDiv.querySelectorAll('td');
+
+                    let gymName = columns[13].innerHTML;
+                    let gymAddressStreet = columns[8].innerHTML;
+                    let gymBuilding = columns[3].innerHTML;
+                    let gymPostalCode = columns[2].innerHTML;
+
+                    layer.bindPopup(`<div>
+                                        <ul>
+                                            <li>${gymName}</li>
+                                            <li>${gymAddressStreet}, ${gymBuilding}</li>
+                                            <li>${gymPostalCode}</li>
+                                        </ul>
+                                    </div>`);
+                }
+            }).addTo(gymLayerGroup);
+
+            return gymsLayer;
+        }
+       
         // create result layers
         let searchResultLayer = L.layerGroup();
         let restaurantFoodLayer = L.layerGroup();
+        let gymLayerGroup = L.layerGroup();
 
+        let baseLayers = {
+            
+        }
         let overlays = {
-            'Nearby food': restaurantFoodLayer
+            'Nearby Food & Dining': restaurantFoodLayer,
+            'Gyms': gymLayerGroup
         }
 
-        L.control.layers(overlays).addTo(mapObject);
+        L.control.layers(baseLayers, overlays).addTo(mapObject);
+
 
         window.addEventListener('DOMContentLoaded', async function(){
+
+            loadGyms();
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
