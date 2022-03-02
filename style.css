@@ -80,6 +80,16 @@ nav .navbar {
     background: white;
 }
 
+#results-filter,
+#filter-icon,
+#filter-btn {
+    display: none;
+}
+
+#filter-icon {
+    color: #d3d3d3;
+}
+
 /* For Desktop */
 @media screen and (min-width: 768px) {
     #container {

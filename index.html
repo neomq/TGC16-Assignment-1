@@ -35,12 +35,10 @@
             <div class="container-fluid">
         
                 <!-- Back button -->
-                
                     <button type="button" id="back-btn" class="btn">
                         <i class="fa-solid fa-angle-left"></i>
                     </button>
                 
-        
                 <!-- Nav bar toggler -->
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,7 +89,6 @@
 
             </div>
         </nav>
-
         <!-- MAP CONTAINER -->
         <div id="map-container">
 
@@ -102,10 +99,21 @@
             <!-- Search Results Panel -->
             <div id="results-pane">
                     <div id="results-header">
+
                         <h5 id="results-title" class="lead mb-4"></h5>
+
+                        <div id="results-filter" class="d-flex flex-row align-items-center">
+                            <div id="filter-icon"><i class="fa-solid fa-filter"></i></div>
+                            <div id="filter-btn" class="px-3">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="btn-check-outlined">Open</label>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                     <div id="search-results" class="mt-4">
-                        <!-- append search results -->
+                    
                     </div>
             </div>
 

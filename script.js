@@ -1,9 +1,3 @@
-// To Do
-// - cluster food layer
-// - Add details to food popup
-// - Add search filter (show only first 5 results hide the rest?)
-// - user location
-
 // Main function
 async function main(){
 
@@ -173,6 +167,11 @@ async function main(){
                     document.querySelector('#results-title').innerHTML = `Suggested Co-working Spaces in Singapore`;
                 }
                 
+                // display results filter
+                document.querySelector('#results-filter').style.display = "block";
+                document.querySelector('#filter-icon').style.display = "block";
+                document.querySelector('#filter-btn').style.display = "block";
+
                 // map markers
                 for (let eachResult of response1.results){
                     let lat = eachResult.geocodes.main.latitude;
@@ -208,6 +207,13 @@ async function main(){
                         website = response3.website;
                     }
                     // get opening hours
+                    let openNow = "";
+                    if (response3.hours.open_now === true) {
+                        openNow = "Open";
+                    } else {
+                        openNow = "Closed";
+                    }
+
                     let openingHours = "";
                     if (response3.hours.display) {
                         openingHours = response3.hours.display;
@@ -224,8 +230,14 @@ async function main(){
                     let searchNearbyFood;
                     for (let eachFoodResult of response4.results){
                         nearFood = eachFoodResult.name;
+                        nearFoodAddress = eachFoodResult.location.formatted_address;
+                        nearFoodDistance = eachFoodResult.distance;
                         searchNearbyFood = L.marker([eachFoodResult.geocodes.main.latitude,eachFoodResult.geocodes.main.longitude]);
-                        searchNearbyFood.bindPopup(`<div>${nearFood}</div>`);
+                        searchNearbyFood.bindPopup(`<div>
+                                                        <p>${nearFood}</p>
+                                                        <p>${nearFoodAddress}</p>
+                                                        <p>${nearFoodDistance}m away</p>
+                                                    </div>`);
                         searchNearbyFood.addTo(nearbyFoodLayer);
                         foodArray.push(nearFood);
                     }                    
@@ -244,15 +256,15 @@ async function main(){
                     popupAddress.className = 'fs-6 text-muted mt-1 mb-2';
                     popupAddress.innerHTML = address;
 
-                    let popupLatLng = document.createElement('p'); // for checking only
-                    popupLatLng.innerHTML = `${lat},${lng}`; // for checking only
+                    // let popupLatLng = document.createElement('p'); // for checking only
+                    // popupLatLng.innerHTML = `${lat},${lng}`; // for checking only
                     
                     popupContent.appendChild(popupTitle);
                     if (photoUrl !== ""){
                         popupContent.innerHTML += popupPhoto;
                     };
                     popupContent.appendChild(popupAddress);
-                    popupContent.appendChild(popupLatLng);
+                    // popupContent.appendChild(popupLatLng);  // for checking only
 
                     // add popup content to marker
                     searchMarker.bindPopup(popupContent, {maxWidth: 200});
@@ -280,7 +292,7 @@ async function main(){
                     let resultWeb = document.createElement('p');
 
                     resultTitle.innerHTML = eachResult.name;
-                    resultHours.innerHTML = openingHours;
+                    resultHours.innerHTML = `${openNow} • ${openingHours}`;
                     resultLocation.innerHTML += address;
                     resultWeb.innerHTML = `<a href="${website}" class="link-primary">${website}</a>`;
                     
@@ -309,7 +321,7 @@ async function main(){
         // Map Setup
         function initMap() {
             let singapore = [1.29, 103.85];
-            let mapObject = L.map('sgmap').setView(singapore, 13); //disable zoomControl when initializing map
+            let mapObject = L.map('sgmap').setView(singapore, 13);
 
             // Tile layers boilerplate
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
