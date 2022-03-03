@@ -119,12 +119,9 @@ async function main(){
         // create custom markers
         const workspaceMarker = L.icon({
             iconUrl: 'images/csmapmarker.png',
-            shadowUrl: 'images/csmapmarker-shadow.png',
-            iconSize: [32, 37],
-            shadowSize: [42, 47],
+            iconSize: [46, 46],
             iconAnchor: [14, 0],
-            shadowAnchor: [17, 6],
-            popupAnchor: [0, 0]
+            popupAnchor: [9, 0]
         });
 
         window.addEventListener('DOMContentLoaded', async function(){
@@ -179,6 +176,7 @@ async function main(){
                     document.querySelector('#results-number').innerHTML = `${resultsNumber} results`;
                 } else {
                     document.querySelector('#results-title').innerHTML = `Suggested Co-working Spaces in Singapore`;
+                    document.querySelector('#results-number').innerHTML = `${resultsNumber} suggestions`;
                 }
                 
                 // display results filter
