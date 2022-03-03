@@ -11,7 +11,7 @@ async function main(){
 
             let gymsLayer = L.geoJson(response.data, {
                 onEachFeature: function (feature, layer) {
-                    console.log(feature.properties)
+                    // console.log(feature.properties)
                     layer.bindPopup(feature.properties.Description);
 
                     let dummyDiv = document.createElement('div');
@@ -34,34 +34,6 @@ async function main(){
             }).addTo(gymLayerGroup);
 
             return gymsLayer;
-        }
-
-        // Load smoking area
-        async function loadSmoking() {
-            let response = await axios.get('data/smoking.geojson');
-
-            let smokingLayer = L.geoJson(response.data, {
-                onEachFeature: function (feature, layer) {
-                    // console.log(feature.properties)
-                    layer.bindPopup(feature.properties.Description);
-
-                    let dummyDiv = document.createElement('div');
-                    dummyDiv.innerHTML = feature.properties.Description;
-                    let columns = dummyDiv.querySelectorAll('td');
-
-                    let smokeArea = columns[1].innerHTML;
-                    let smokeDescription = columns[0].innerHTML;
-
-                    layer.bindPopup(`<div>
-                                        <ul>
-                                            <li>${smokeArea}</li>
-                                            <li>${smokeDescription}</li>
-                                        </ul>
-                                    </div>`);
-                }
-            }).addTo(smokeLayerGroup);
-
-            return smokingLayer;
         }
 
         // Load supermarkets
@@ -98,23 +70,24 @@ async function main(){
        
         // create map layers
         let searchResultLayer = L.layerGroup();
-
         let nearbyFoodLayer = L.markerClusterGroup(); 
         let gymLayerGroup = L.markerClusterGroup(); 
-        let smokeLayerGroup = L.markerClusterGroup(); 
         let supermarketsLayer = L.markerClusterGroup(); 
 
         let baseLayers = {
             
         }
         let overlays = {
-            'Nearby Food & Dining': nearbyFoodLayer,
+            'nearby food': nearbyFoodLayer,
             'Gyms': gymLayerGroup,
-            'Designated Smoking areas': smokeLayerGroup,
             'Supermarkets': supermarketsLayer
         }
 
-        L.control.layers(baseLayers, overlays, {position: 'topleft'}).addTo(mapObject);
+        L.control.layers(baseLayers, overlays, {position: 'topright'}).addTo(mapObject);
+
+        // hide leaflet layers menu
+        let lc = document.getElementsByClassName('leaflet-control-layers');
+        lc[0].style.visibility = 'hidden';
 
         // create custom markers
         const workspaceMarker = L.icon({
@@ -127,8 +100,45 @@ async function main(){
         window.addEventListener('DOMContentLoaded', async function(){
 
             loadGyms();
-            loadSmoking();
             loadSupermarkets();
+
+            // Map layers toggle
+            // food layer 
+            document.querySelector("#layer-btn-toggle-food").addEventListener('click', function(){
+                if (mapObject.hasLayer(nearbyFoodLayer)) {
+                    document.querySelector("#layer-btn-toggle-food").classList.remove('btn-secondary');
+                    document.querySelector("#layer-btn-toggle-food").classList.add('btn-light');
+                    mapObject.removeLayer(nearbyFoodLayer);
+                } else {
+                    document.querySelector("#layer-btn-toggle-food").classList.remove('btn-light');
+                    document.querySelector("#layer-btn-toggle-food").classList.add('btn-secondary');
+                    mapObject.addLayer(nearbyFoodLayer);
+                }
+            });
+            // gym layer
+            document.querySelector("#layer-btn-toggle-gym").addEventListener('click', function(){
+                if (mapObject.hasLayer(gymLayerGroup)) {
+                    document.querySelector("#layer-btn-toggle-gym").classList.remove('btn-secondary');
+                    document.querySelector("#layer-btn-toggle-gym").classList.add('btn-light');
+                    mapObject.removeLayer(gymLayerGroup);
+                } else {
+                    document.querySelector("#layer-btn-toggle-gym").classList.remove('btn-light');
+                    document.querySelector("#layer-btn-toggle-gym").classList.add('btn-secondary');
+                    mapObject.addLayer(gymLayerGroup);
+                }
+            });
+            // supermarket layer
+            document.querySelector("#layer-btn-toggle-market").addEventListener('click', function(){
+                if (mapObject.hasLayer(supermarketsLayer)) {
+                    document.querySelector("#layer-btn-toggle-market").classList.remove('btn-secondary');
+                    document.querySelector("#layer-btn-toggle-market").classList.add('btn-light');
+                    mapObject.removeLayer(supermarketsLayer);
+                } else {
+                    document.querySelector("#layer-btn-toggle-market").classList.remove('btn-light');
+                    document.querySelector("#layer-btn-toggle-market").classList.add('btn-secondary');
+                    mapObject.addLayer(supermarketsLayer);
+                }
+            });
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
@@ -180,7 +190,11 @@ async function main(){
                 }
                 
                 // display results filter
-                document.querySelector('#results-filter').style.display = "block";
+                let searchFilter = document.querySelector('#results-filter');
+                searchFilter.style.display = "block";
+                
+                // map layers toggle to appear
+                document.querySelector("#layer-container").style.display = "block";
 
                 // map markers
                 for (let eachResult of response1.results){
@@ -236,7 +250,7 @@ async function main(){
                     let response4 = await searchNearFood(ll);
                     //console.log(response4);
                     let nearFood = "";
-                    let foodArray = [];
+                    //let foodArray = [];
                     let searchNearbyFood;
                     for (let eachFoodResult of response4.results){
                         nearFood = eachFoodResult.name;
@@ -249,9 +263,9 @@ async function main(){
                                                         <p>${nearFoodDistance}m away</p>
                                                     </div>`);
                         searchNearbyFood.addTo(nearbyFoodLayer);
-                        foodArray.push(nearFood);
-                    }                    
-                    
+                        //foodArray.push(nearFood);
+                    }
+
                     // create popup content
                     let popupContent = document.createElement('div');
                     popupContent.className = 'py-1';
@@ -319,19 +333,22 @@ async function main(){
                         mapObject.flyTo(coordinates, 18);
                         searchMarker.openPopup();
                     })
-                    // auto-click first search result location
-                    // document.querySelector('.search-result').click();
+                    
                 }
 
                 searchResultLayer.addTo(mapObject);
-                nearbyFoodLayer.addTo(mapObject);
+                // nearbyFoodLayer.addTo(mapObject);
             })
         })
 
         // Map Setup
         function initMap() {
             let singapore = [1.29, 103.85];
-            let mapObject = L.map('sgmap').setView(singapore, 13);
+            let mapObject = L.map('sgmap',{zoomControl: false}).setView(singapore, 13);
+
+            L.control.zoom({
+                position:'bottomright'
+            }).addTo(mapObject);
 
             // Tile layers boilerplate
             // 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}'
