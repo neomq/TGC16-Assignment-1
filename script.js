@@ -139,14 +139,42 @@ async function main(){
                     mapObject.addLayer(supermarketsLayer);
                 }
             });
+            
+            let mediaQueryMax767 = window.matchMedia('(max-width: 767px)'); // for sm
+            let mediaQueryMin768 = window.matchMedia('(min-width: 768px)'); // for md & lg
+
+            document.querySelector('#show-results-btn').addEventListener('click', function(){
+                // for md & lg
+                if (mediaQueryMin768.matches) {
+                    document.querySelector('#show-results-btn').style.display = "none";
+                    document.querySelector('#results-container').style.height = null;
+                    document.querySelector('#results-container').style.padding = "14px 26px";
+                    document.querySelector('#results-pane').style.height = null;
+                };
+                // for sm
+                if (mediaQueryMax767.matches) {
+                    document.querySelector('#show-results-btn').style.display = "none";
+                    document.querySelector('#results-container').style.height = null;
+                    document.querySelector('#results-container').style.padding = "18px 22px 14px 22px";
+                    document.querySelector('#results-pane').style.height = null;
+                };
+            });
+
+            document.querySelector('#hide-btn').addEventListener('click', function(){
+                document.querySelector('#results-container').style.height = "0";
+                document.querySelector('#results-container').style.overflow = "hidden";
+                document.querySelector('#results-container').style.padding = "0";
+                document.querySelector('#results-pane').style.height = "0";
+                document.querySelector('#show-results-btn').style.display = "block";
+            })
 
             // Search - when user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
-                // auto-click navbar-toggler on mobile to collapse search bar
-                let mediaQuery = window.matchMedia('(max-width: 991px)')
-                // if the media query is true
-                if (mediaQuery.matches) {
+                // auto-click to collapse search bar
+                let mediaQueryMax991 = window.matchMedia('(max-width: 991px)');
+                // if the max-width: 991px is true
+                if (mediaQueryMax991.matches) {
                     // trigger auto-click
                     document.querySelector(".navbar-toggler").click();
                 }
@@ -352,7 +380,8 @@ async function main(){
 
             // Tile layers boilerplate
             // 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}'
-            L.tileLayer('https://api.mapbox.com/styles/v1/mqneo/cl09ur8r9004016mqo7v9bx8b/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibXFuZW8iLCJhIjoiY2wwOXVoZHdrMGgwbzNrbnRrZWlycDh6MSJ9.1Xpvf-vfkPdh_0yvX9kgOw', {
+            // 'https://api.mapbox.com/styles/v1/mqneo/cl09ur8r9004016mqo7v9bx8b/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibXFuZW8iLCJhIjoiY2wwOXVoZHdrMGgwbzNrbnRrZWlycDh6MSJ9.1Xpvf-vfkPdh_0yvX9kgOw'
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox/streets-v11',
