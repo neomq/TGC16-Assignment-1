@@ -30,7 +30,7 @@
 <body>
     <div id="container">
 
-        <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow p-3">
+        <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
             <div class="container-fluid">
         
                 <!-- Back button -->
@@ -89,24 +89,6 @@
             </div>
         </nav>
         
-        <!-- map layer button toggle group -->
-        <div id="layer-container">
-            <div id="layer-toggle" class="d-flex justify-content-center">
-                <button id="layer-btn-toggle-food" type="button" class="d-flex align-items-center btn btn-light shadow">
-                    <i class="layer-icon fa-solid fa-utensils"></i>
-                    <p class="layer-text m-0 ms-2">Food nearby</p>
-                </button>
-                <button id="layer-btn-toggle-gym" type="button" class="d-flex ms-2 align-items-center btn btn-light shadow">
-                    <i class="layer-icon fa-solid fa-dumbbell"></i>
-                    <p class="layer-text m-0 ms-2">Gym</p>
-                </button>
-                <button id="layer-btn-toggle-market" type="button" class="d-flex ms-2 align-items-center btn btn-light shadow">
-                    <i class="fa-solid fa-store"></i>
-                    <p class="layer-text m-0 ms-2">Supermarkets</p>
-                </button>
-            </div>
-        </div>
-        
         <!-- MAP CONTAINER -->
         <div id="map-container">
 
@@ -115,7 +97,7 @@
             </div>
 
             <!-- MAP LAYERS -->
-            <!-- <div id="layer-container">
+            <div id="layer-container">
                 <div id="layer-toggle" class="d-flex justify-content-center">
                     <button id="layer-btn-toggle-food" type="button" class="d-flex align-items-center btn btn-light shadow">
                         <i class="layer-icon fa-solid fa-utensils"></i>
@@ -130,10 +112,11 @@
                         <p class="layer-text m-0 ms-2">Supermarkets</p>
                     </button>
                 </div>
-            </div> -->
+            </div>
             
             <!-- Search Results Panel -->
             <div id="results-pane">
+
                     <div id="results-header">
 
                         <h5 id="results-title"></h5>

@@ -218,7 +218,7 @@ async function main(){
                     if (response2[0]) {
                         let prefix = response2[0].prefix;
                         let suffix = response2[0].suffix;
-                        photoUrl = prefix + '200x150' + suffix;
+                        photoUrl = prefix + '180x135' + suffix;
                     } 
 
                     // get place information
@@ -291,7 +291,7 @@ async function main(){
                     // popupContent.appendChild(popupLatLng);  // for checking only
 
                     // add popup content to marker
-                    searchMarker.bindPopup(popupContent, {maxWidth: 200});
+                    searchMarker.bindPopup(popupContent, {maxWidth: 180});
                     
                     // add marker to search layer
                     searchMarker.addTo(searchResultLayer);
