@@ -140,26 +140,31 @@ async function main(){
                 }
             });
             
+            // Interaction of search results panel
             let mediaQueryMax767 = window.matchMedia('(max-width: 767px)'); // for sm
             let mediaQueryMin768 = window.matchMedia('(min-width: 768px)'); // for md & lg
-
+            function showSearchLargeScreen(){
+                document.querySelector('#show-results-btn').style.display = "none";
+                document.querySelector('#results-container').style.height = null;
+                document.querySelector('#results-container').style.padding = "14px 26px";
+                document.querySelector('#results-pane').style.height = null;
+            }
+            function showSearchMobile(){
+                document.querySelector('#show-results-btn').style.display = "none";
+                document.querySelector('#results-container').style.height = null;
+                document.querySelector('#results-container').style.padding = "18px 22px 14px 22px";
+                document.querySelector('#results-pane').style.height = null;
+            }
             document.querySelector('#show-results-btn').addEventListener('click', function(){
                 // for md & lg
                 if (mediaQueryMin768.matches) {
-                    document.querySelector('#show-results-btn').style.display = "none";
-                    document.querySelector('#results-container').style.height = null;
-                    document.querySelector('#results-container').style.padding = "14px 26px";
-                    document.querySelector('#results-pane').style.height = null;
+                    showSearchLargeScreen();
                 };
                 // for sm
                 if (mediaQueryMax767.matches) {
-                    document.querySelector('#show-results-btn').style.display = "none";
-                    document.querySelector('#results-container').style.height = null;
-                    document.querySelector('#results-container').style.padding = "18px 22px 14px 22px";
-                    document.querySelector('#results-pane').style.height = null;
+                    showSearchMobile();
                 };
             });
-
             document.querySelector('#hide-btn').addEventListener('click', function(){
                 document.querySelector('#results-container').style.height = "0";
                 document.querySelector('#results-container').style.overflow = "hidden";
@@ -168,7 +173,7 @@ async function main(){
                 document.querySelector('#show-results-btn').style.display = "block";
             })
 
-            // Search - when user clicks on search button
+            // When user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
                 // auto-click to collapse search bar
@@ -265,7 +270,6 @@ async function main(){
                     } else {
                         openNow = "Closed";
                     }
-
                     let openingHours = "";
                     if (response3.hours.display) {
                         openingHours = response3.hours.display;
@@ -365,7 +369,6 @@ async function main(){
                 }
 
                 searchResultLayer.addTo(mapObject);
-                // nearbyFoodLayer.addTo(mapObject);
             })
         })
 
