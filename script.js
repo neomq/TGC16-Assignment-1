@@ -173,8 +173,10 @@ async function main(){
                 document.querySelector('#show-results-btn').style.display = "block";
             })
 
-            // When user clicks on search button
-            document.querySelector('#search-btn').addEventListener('click', async function(){
+             // When user clicks on search button
+            let searchButtons = document.querySelectorAll('#search-btn');
+            for (i of searchButtons) {
+                i.addEventListener('click', async function() {
 
                 mapObject.invalidateSize();
 
@@ -370,7 +372,10 @@ async function main(){
                 }
 
                 searchResultLayer.addTo(mapObject);
-            })
+
+                });
+            };
+            
         })
 
         // Map Setup
