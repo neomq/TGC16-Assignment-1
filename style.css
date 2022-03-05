@@ -20,7 +20,7 @@
 
 /* NAV + SEARCH */
 .form-control::placeholder {
-    color: #38526070;
+    color: #385260B3; /* 70% opacity */
 }
 
 nav .navbar {
@@ -36,6 +36,7 @@ nav .navbar {
 .search-container {
     position: fixed;
     box-sizing: border-box;
+    background: #FCFCFC;
     width: 100%;
     z-index: 314170;
 }
@@ -59,10 +60,17 @@ nav .navbar {
     color: #ffffff;
 }
 
-#keyword-box,
-#location-box {
-    /* border: 1px solid #38526040; */
-    background: #fcfcfc;
+.page1-container .cta {
+    width: 75vw;
+}
+
+.page1-search-container {
+    background-color: #EFEEEC;
+}
+
+#page1-keyword-box,
+#page1-location-box {
+    background: #FCFCFC;
     border-radius: 4px;
 }
 
@@ -70,12 +78,10 @@ nav .navbar {
     font-size: 0.9em;
 }
 
-.page1-search-container {
-    background-color: #EFEEEC;
-}
-
-.page1-container .cta {
-    width: 75vw;
+#page2-keyword-box,
+#page2-location-box {
+    background: #EFEEEC60;
+    border-radius: 4px;
 }
 
 /* MAP */
@@ -93,7 +99,7 @@ nav .navbar {
 #layer-container {
     position: absolute;
     width: 100%;
-    top: 14%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 314159;
@@ -119,7 +125,7 @@ nav .navbar {
     padding: 18px 22px 14px 22px; 
 
     z-index: 314161;
-    background: white;
+    background: #FCFCFC;
     box-shadow: 0px 0 5px rgba(27, 27, 27, 0.2); /* offset-x | offset-y | blur-radius | color */
 }
 
@@ -140,6 +146,26 @@ nav .navbar {
     background: white;
 }
 
+#results-header,
+.card-title,
+.card-text {
+    color: #385260;
+}
+
+#results-title {
+    font-size: 1.2em;
+}
+
+.card-title {
+    font-size: 1.2em;
+}
+
+.card-category,
+.card-text {
+    font-size: 0.95em;
+    color: #385260CC; /* 80% OPACITY */
+}
+
 #results-filter {
     display: none;
 }
@@ -151,6 +177,24 @@ nav .navbar {
     left: 26px;
     bottom: 30px;
 }
+
+#show-results-btn button {
+    background: #FCFCFC;
+}
+
+#show-results-btn i {
+    color: #e65541;
+}
+
+#hide-btn {
+    color: #38526080;
+}
+
+/* Leaflet Popup */
+.leaflet-popup-content-wrapper, .leaflet-popup.tip {
+    background-color: #FCFCFC;
+    color: #385260;
+  }
 
 /* For MD and LG screen size */
 @media screen and (min-width: 768px) {

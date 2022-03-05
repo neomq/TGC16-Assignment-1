@@ -47,12 +47,12 @@
                         <div class="container d-flex py-lg-2 px-3">
                             
                                 <!-- Search Form -->
-                                <form class="d-flex flex-fill mt-3 mb-2 my-lg-1 my-xl-0">
+                                <form class="d-flex flex-fill mt-3 mb-2 my-lg-1 my-xl-0" autocomplete="off">
                                     <div class="row d-flex flex-fill align-items-center">
                     
                                         <!-- Search Location -->
                                         <div class="p-0 pe-lg-1 col-lg-5 col-xl-4">
-                                            <div id="location-box" class="d-flex align-items-center py-1 px-lg-1 form-group">
+                                            <div id="page1-location-box" class="d-flex align-items-center py-1 px-lg-1 form-group">
                                                 <div class="searchbar-icon px-2"><i class="fa-solid fa-location-dot"></i></div>
                                                 <input class="form-control bg-transparent border-0" list="datalistOptions" id="location-input"
                                                     placeholder="Area">
@@ -61,14 +61,14 @@
                                                     <option value="Bishan">
                                                     <option value="Clementi">
                                                     <option value="Orchard">
-                                                    <option value="Raffles City">
+                                                    <option value="Raffles">
                                                 </datalist>
                                             </div>
                                         </div>
                                         
                                         <!-- Search Keyword -->
                                         <div class="p-0 ps-lg-1 col-lg-7 col-xl-5 ps-xl-1 pe-xl-3 mt-2 mt-lg-0 ms-lg-0">
-                                            <div id="keyword-box" class="d-flex align-items-center py-1 px-lg-1 form-group">
+                                            <div id="page1-keyword-box" class="d-flex align-items-center py-1 px-lg-1 form-group">
                                                 <div class="searchbar-icon px-2">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                 </div>
@@ -96,7 +96,7 @@
                 <!-- page 2 content -->
                 <div id="container">
 
-                    <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+                    <nav class="search-container navbar navbar-expand-lg shadow-sm p-3">
                         <div class="container-fluid">
                     
                             <!-- Back button -->
@@ -113,15 +113,10 @@
                             <!-- collapse -->
                             <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
                                 <!-- Search Form -->
-                                <form class="d-flex justify-content-center mt-3 mt-lg-0">
+                                <form class="d-flex justify-content-center mt-3 mt-lg-0" autocomplete="off">
                                     <div class="row col-lg-11 d-flex align-items-center">
-                    
-                                        <!-- Search Location -->
-                                            <!-- <div class="location-label d-flex justify-content-end align-items-center me-3 p-2 col-lg-2">
-                                                <p class="align-self-center p-0 m-0"><strong>Singapore</strong></p>
-                                            </div> -->
             
-                                            <div id="location-box" class="d-flex align-items-center col-lg-2 py-1 form-group">
+                                            <div id="page2-location-box" class="d-flex align-items-center col-lg-2 py-1 form-group">
                                                 <div class="searchbar-icon px-2"><i class="fa-solid fa-location-dot"></i></div>
                                                 <input class="form-control bg-transparent border-0" list="datalistOptions" id="location-input"
                                                     placeholder="Area">
@@ -135,7 +130,7 @@
                                             </div>
             
                                         <!-- Search Keyword -->
-                                        <div id="keyword-box" class="d-flex align-items-center col-lg-3 py-1 mt-2 mt-lg-0 ms-lg-3 form-group">
+                                        <div id="page2-keyword-box" class="d-flex align-items-center col-lg-3 py-1 mt-2 mt-lg-0 ms-lg-3 form-group">
                                             <div class="searchbar-icon px-2">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </div>
@@ -182,7 +177,7 @@
                         
                         <!-- Search Results Panel -->
                         <div id="show-results-btn" class="shadow">
-                            <button type="button" class="btn btn-light"><i class="fa-solid fa-list"></i></button>
+                            <button type="button" class="btn"><i class="fa-solid fa-list"></i></button>
                         </div>
             
                         <div id="results-container">
@@ -193,20 +188,23 @@
             
                                 <div id="results-header">
             
-                                    <h5 id="results-title"></h5>
+                                    <h6 id="results-title"></h6>
                                     <p id="results-number" class="text-muted mb-4"></p>
             
                                     <div class="d-flex flex-row align-items-center">
                                         <div id="results-filter" class="form-check form-switch">
-                                            <input id="filter-switch" class="form-check-input" type="checkbox" role="switch" value="checked" id="flexSwitchCheckDefault">
+                                            <input id="filter-switch" class="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault">
                                             <label class="form-check-label lead fs-6 text-muted" for="flexSwitchCheckDefault">Show open locations</label>
                                         </div>
                                     </div>
                                     
                                 </div>
-                                <div id="search-results" class="mt-4">
+                                
+                                <div id="search-results" class="bg-transparent mt-4">
+                                    <!-- append search results -->
                                 </div>
-            
+                                
+
                             </div>
             
                         </div>

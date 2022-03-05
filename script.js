@@ -91,10 +91,10 @@ async function main(){
 
         // create custom markers
         const workspaceMarker = L.icon({
-            iconUrl: 'images/icons/csmapmarker.png',
-            iconSize: [46, 46],
+            iconUrl: 'images/icons/cs-mapmarker.png',
+            iconSize: [35, 43],
             iconAnchor: [14, 0],
-            popupAnchor: [9, 0]
+            popupAnchor: [4, 0]
         });
 
         window.addEventListener('DOMContentLoaded', async function(){
@@ -175,7 +175,7 @@ async function main(){
 
              // When user clicks on search button
             let searchButtons = document.querySelectorAll('#search-btn');
-            for (i of searchButtons) {
+            for (let i of searchButtons) {
                 i.addEventListener('click', async function() {
 
                 mapObject.invalidateSize();
@@ -195,7 +195,7 @@ async function main(){
                 // clear prior search results
                 document.querySelector('#search-results').textContent = "";
                 
-                // get place search value
+                // get search query
                 let keyword = "";
                 let location = "";
                 
@@ -204,7 +204,8 @@ async function main(){
                 
                 if (searchValue){ keyword = searchValue; }
                 if (locationValue){ location = document.querySelector("#location-input").value; }
-                let near = `${location}, Singapore` // string seperated by comma
+                
+                let near = `${location}, Singapore`
 
                 let response1 = await search(keyword, near);
                 console.log("search: ", keyword, "near ", near)
@@ -332,36 +333,62 @@ async function main(){
                     // add marker to search layer
                     searchMarker.addTo(searchResultLayer);
 
-                    // append search results to searchResultElement
+                    // append search results to searchResultElement //
                     let searchResultElement = document.querySelector('#search-results');
+
                     let resultElement = document.createElement('div');
-                    resultElement.className = 'search-result card mb-3 p-2';
+                    resultElement.className = 'search-result card bg-transparent mb-3 p-2';
 
                     let resultElementCard = document.createElement('div');
                     resultElementCard.className = 'card-body';
 
                     let resultTitle = document.createElement('h6');
-                    resultTitle.className = 'card-title';
+                    resultTitle.className = 'card-title pb-2';
 
                     let resultHours = document.createElement('p');
-                    resultHours.className = 'card-category lead fs-6';
-
+                    if (openNow === "Open") {
+                        resultHours.className = 'card-category open my-2';
+                    } else {
+                        resultHours.className = 'card-category close my-2';
+                    }
+                    
                     let resultLocation = document.createElement('p');
-                    resultLocation.className = 'card-text text-muted';
+                    resultLocation.className = 'card-text mb-2';
 
-                    let resultWeb = document.createElement('p');
+                    // let resultWeb = document.createElement('div');
+                    // resultWeb.className = 'mt-3';
 
                     resultTitle.innerHTML = eachResult.name;
-                    resultHours.innerHTML = `${openNow} • ${openingHours}`;
+                    resultHours.innerHTML = `<i class="fa-regular fa-clock"></i>&nbsp;&nbsp;${openNow} • ${openingHours}`;
                     resultLocation.innerHTML += address;
-                    resultWeb.innerHTML = `<a href="${website}" class="link-primary">${website}</a>`;
-                    
+                    // resultWeb.innerHTML = `<a class="btn btn-outline-secondary btn-sm" href="${website}" role="button">Visit Website</a>`;
+
                     searchResultElement.appendChild(resultElement);
                     resultElement.appendChild(resultElementCard);
                     resultElementCard.appendChild(resultTitle);
                     resultElementCard.appendChild(resultHours);
                     resultElementCard.appendChild(resultLocation);
-                    resultElementCard.appendChild(resultWeb);
+
+                    if (website !== ""){
+                        let resultWeb = document.createElement('div');
+                        resultWeb.className = 'mt-3';
+                        resultWeb.innerHTML = `<a class="btn btn-outline-secondary btn-sm" href="${website}" role="button">Visit Website</a>`;
+                        resultElementCard.appendChild(resultWeb);
+                    }
+                    
+                    
+                    // search filtering
+                    // let searchFilter = document.querySelector('#filter-switch');
+                    // searchFilter.addEventListener('click', function(){
+                    //     if (searchFilter.checked == true){
+                    //         // console.log("checked");
+                    //         if (openNow === "Open"){
+                    //             document.querySelector('.close').style.display = "none";
+                    //         }
+                    //     } else {
+                    //         // console.log("unchecked");
+                    //     }
+                    // })
 
                     // Event listener to resultElement
                     resultElement.addEventListener('click', function(){
@@ -370,9 +397,7 @@ async function main(){
                         searchMarker.openPopup();
                     })
                 }
-
                 searchResultLayer.addTo(mapObject);
-
                 });
             };
             
