@@ -28,127 +28,200 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
+    
+    <div id="all-pages">
 
-        <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
-            <div class="container-fluid">
-        
-                <!-- Back button -->
-                <button type="button" id="back-btn" class="btn">
-                    <i class="fa-solid fa-angle-left"></i>
-                </button>
+        <div class="page" id="page-1">
+            <div class="page-container">
+                <!-- page 1 content -->
+
+                <!-- page 1 search bar -->
+                <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+                    <div class="container-fluid">
+                        
+                        <!-- Nav bar toggler -->
+                        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        
+                        <!-- collapse -->
+                        <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <!-- Search Form -->
+                            <form class="d-flex justify-content-center mt-3 mt-lg-0">
+                                <div class="row col-lg-11 d-flex align-items-center">
                 
-                <!-- Nav bar toggler -->
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
+                                    <!-- Search Location -->
+                                        <!-- <div class="location-label d-flex justify-content-end align-items-center me-3 p-2 col-lg-2">
+                                            <p class="align-self-center p-0 m-0"><strong>Singapore</strong></p>
+                                        </div> -->
+        
+                                        <div id="location-box" class="d-flex align-items-center col-lg-2 py-1 form-group">
+                                            <div class="searchbar-icon px-2"><i class="fa-solid fa-location-dot"></i></div>
+                                            <input class="form-control bg-transparent border-0" list="datalistOptions" id="location-input"
+                                                placeholder="Area">
+                                            <datalist id="datalistOptions">
+                                                <option value="Ang Mo Kio">
+                                                <option value="Bishan">
+                                                <option value="Clementi">
+                                                <option value="Orchard">
+                                                <option value="Raffles City">
+                                            </datalist>
+                                        </div>
+        
+                                    <!-- Search Keyword -->
+                                    <div id="keyword-box" class="d-flex align-items-center col-lg-3 py-1 mt-2 mt-lg-0 ms-lg-3 form-group">
+                                        <div class="searchbar-icon px-2">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </div>
+                                        <input id="search-input" class="form-control bg-transparent border-0" type="text" name="search"
+                                            placeholder="Keyword or Destination">
+                                    </div>
                 
-                <!-- collapse -->
-                <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <!-- Search Form -->
-                    <form class="d-flex justify-content-center mt-3 mt-lg-0">
-                        <div class="row col-lg-11 d-flex align-items-center">
-        
-                            <!-- Search Location -->
-                                <div class="location-label d-flex justify-content-end align-items-center me-3 p-2 col-lg-2">
-                                    <p class="align-self-center p-0 m-0"><strong>Singapore</strong></p>
+                                    <!-- Search Button -->
+                                    <div class="col-lg-2 ms-lg-3 d-grid p-0 mt-2 py-lg-1 my-2 my-lg-0">
+                                        <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
+                                    </div>
+                
                                 </div>
-
-                                <div id="location-box" class="d-flex align-items-center col-lg-2 py-1 form-group">
-                                    <div class="searchbar-icon px-2"><i class="fa-solid fa-location-dot"></i></div>
-                                    <input class="form-control bg-transparent border-0" list="datalistOptions" id="location-input"
-                                        placeholder="Area">
-                                    <datalist id="datalistOptions">
-                                        <option value="Ang Mo Kio">
-                                        <option value="Bishan">
-                                        <option value="Clementi">
-                                        <option value="Orchard">
-                                        <option value="Raffles City">
-                                    </datalist>
-                                </div>
-
-                            <!-- Search Keyword -->
-                            <div id="keyword-box" class="d-flex align-items-center col-lg-3 py-1 mt-2 mt-lg-0 ms-lg-3 form-group">
-                                <div class="searchbar-icon px-2">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <input id="search-input" class="form-control bg-transparent border-0" type="text" name="search"
-                                    placeholder="Keyword or Destination">
-                            </div>
-        
-                            <!-- Search Button -->
-                            <div class="col-lg-2 ms-lg-3 d-grid p-0 mt-2 py-lg-1 my-2 my-lg-0">
-                                <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
-                            </div>
-        
+                            </form>
                         </div>
-                    </form>
-                </div>
-
-            </div>
-        </nav>
         
-        <!-- MAP CONTAINER -->
-        <div id="map-container">
+                    </div>
+                </nav>
 
-            <!-- SG MAP -->
-            <div id="sgmap">
             </div>
+        </div>
 
-            <!-- MAP LAYERS -->
-            <div id="layer-container">
-                <div id="layer-toggle" class="d-flex justify-content-center">
-                    <button id="layer-btn-toggle-food" type="button" class="d-flex align-items-center btn btn-light shadow">
-                        <i class="layer-icon fa-solid fa-utensils"></i>
-                        <p class="layer-text m-0 ms-2">Food nearby</p>
-                    </button>
-                    <button id="layer-btn-toggle-gym" type="button" class="d-flex ms-2 align-items-center btn btn-light shadow">
-                        <i class="layer-icon fa-solid fa-dumbbell"></i>
-                        <p class="layer-text m-0 ms-2">Gym</p>
-                    </button>
-                    <button id="layer-btn-toggle-market" type="button" class="d-flex ms-2 align-items-center btn btn-light shadow">
-                        <i class="fa-solid fa-store"></i>
-                        <p class="layer-text m-0 ms-2">Supermarkets</p>
-                    </button>
-                </div>
-            </div>
+        <div class="page hidden" id="page-2">
+            <div class="page-container">
+                <!-- page 2 content -->
+                <div id="container">
+
+                    <nav class="search-container navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+                        <div class="container-fluid">
+                    
+                            <!-- Back button -->
+                            <button type="button" id="page1-btn" class="btn">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+                            
+                            <!-- Nav bar toggler -->
+                            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            
+                            <!-- collapse -->
+                            <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
+                                <!-- Search Form -->
+                                <form class="d-flex justify-content-center mt-3 mt-lg-0">
+                                    <div class="row col-lg-11 d-flex align-items-center">
+                    
+                                        <!-- Search Location -->
+                                            <!-- <div class="location-label d-flex justify-content-end align-items-center me-3 p-2 col-lg-2">
+                                                <p class="align-self-center p-0 m-0"><strong>Singapore</strong></p>
+                                            </div> -->
             
-            <!-- Search Results Panel -->
-            <div id="show-results-btn" class="shadow">
-                <button type="button" class="btn btn-light"><i class="fa-solid fa-list"></i></button>
-            </div>
-
-            <div id="results-container">
-
-                <div id="pane-toggle"><button type="button" id="hide-btn" class="btn p-0"><i class="fa-solid fa-xmark"></i></button></div>
-
-                <div id="results-pane">
-
-                    <div id="results-header">
-
-                        <h5 id="results-title"></h5>
-                        <p id="results-number" class="text-muted mb-4"></p>
-
-                        <div class="d-flex flex-row align-items-center">
-                            <div id="results-filter" class="form-check form-switch">
-                                <input id="filter-switch" class="form-check-input" type="checkbox" role="switch" value="checked" id="flexSwitchCheckDefault">
-                                <label class="form-check-label lead fs-6 text-muted" for="flexSwitchCheckDefault">Show open locations</label>
+                                            <div id="location-box" class="d-flex align-items-center col-lg-2 py-1 form-group">
+                                                <div class="searchbar-icon px-2"><i class="fa-solid fa-location-dot"></i></div>
+                                                <input class="form-control bg-transparent border-0" list="datalistOptions" id="location-input"
+                                                    placeholder="Area">
+                                                <datalist id="datalistOptions">
+                                                    <option value="Ang Mo Kio">
+                                                    <option value="Bishan">
+                                                    <option value="Clementi">
+                                                    <option value="Orchard">
+                                                    <option value="Raffles City">
+                                                </datalist>
+                                            </div>
+            
+                                        <!-- Search Keyword -->
+                                        <div id="keyword-box" class="d-flex align-items-center col-lg-3 py-1 mt-2 mt-lg-0 ms-lg-3 form-group">
+                                            <div class="searchbar-icon px-2">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </div>
+                                            <input id="search-input" class="form-control bg-transparent border-0" type="text" name="search"
+                                                placeholder="Keyword or Destination">
+                                        </div>
+                    
+                                        <!-- Search Button -->
+                                        <div class="col-lg-2 ms-lg-3 d-grid p-0 mt-2 py-lg-1 my-2 my-lg-0">
+                                            <button class="btn btn-dark rounded-3 shadow-sm" type="button" id="search-btn">Search</button>
+                                        </div>
+                    
+                                    </div>
+                                </form>
+                            </div>
+            
+                        </div>
+                    </nav>
+                    
+                    <!-- MAP CONTAINER -->
+                    <div id="map-container">
+            
+                        <!-- SG MAP -->
+                        <div id="sgmap">
+                        </div>
+            
+                        <!-- MAP LAYERS -->
+                        <div id="layer-container">
+                            <div id="layer-toggle" class="d-flex justify-content-center">
+                                <button id="layer-btn-toggle-food" type="button" class="d-flex align-items-center btn btn-light shadow">
+                                    <i class="layer-icon fa-solid fa-utensils"></i>
+                                    <p class="layer-text m-0 ms-2">Food nearby</p>
+                                </button>
+                                <button id="layer-btn-toggle-gym" type="button" class="d-flex ms-2 align-items-center btn btn-light shadow">
+                                    <i class="layer-icon fa-solid fa-dumbbell"></i>
+                                    <p class="layer-text m-0 ms-2">Gym</p>
+                                </button>
+                                <button id="layer-btn-toggle-market" type="button" class="d-flex ms-2 align-items-center btn btn-light shadow">
+                                    <i class="fa-solid fa-store"></i>
+                                    <p class="layer-text m-0 ms-2">Supermarkets</p>
+                                </button>
                             </div>
                         </div>
                         
-                    </div>
-                    <div id="search-results" class="mt-4">
-                    </div>
-
-                </div>
-
-            </div>
+                        <!-- Search Results Panel -->
+                        <div id="show-results-btn" class="shadow">
+                            <button type="button" class="btn btn-light"><i class="fa-solid fa-list"></i></button>
+                        </div>
             
-
+                        <div id="results-container">
+            
+                            <div id="pane-toggle"><button type="button" id="hide-btn" class="btn p-0"><i class="fa-solid fa-xmark"></i></button></div>
+            
+                            <div id="results-pane">
+            
+                                <div id="results-header">
+            
+                                    <h5 id="results-title"></h5>
+                                    <p id="results-number" class="text-muted mb-4"></p>
+            
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div id="results-filter" class="form-check form-switch">
+                                            <input id="filter-switch" class="form-check-input" type="checkbox" role="switch" value="checked" id="flexSwitchCheckDefault">
+                                            <label class="form-check-label lead fs-6 text-muted" for="flexSwitchCheckDefault">Show open locations</label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div id="search-results" class="mt-4">
+                                </div>
+            
+                            </div>
+            
+                        </div>
+                        
+                    </div>
+            
+                </div>
+            </div>
         </div>
 
     </div>
+
+    
     
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

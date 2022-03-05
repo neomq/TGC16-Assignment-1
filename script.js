@@ -176,6 +176,8 @@ async function main(){
             // When user clicks on search button
             document.querySelector('#search-btn').addEventListener('click', async function(){
 
+                mapObject.invalidateSize();
+
                 // auto-click to collapse search bar
                 let mediaQueryMax991 = window.matchMedia('(max-width: 991px)');
                 // if the max-width: 991px is true
@@ -365,7 +367,6 @@ async function main(){
                         mapObject.flyTo(coordinates, 18);
                         searchMarker.openPopup();
                     })
-                    
                 }
 
                 searchResultLayer.addTo(mapObject);
@@ -384,7 +385,7 @@ async function main(){
             // Tile layers boilerplate
             // 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}'
             // 'https://api.mapbox.com/styles/v1/mqneo/cl09ur8r9004016mqo7v9bx8b/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibXFuZW8iLCJhIjoiY2wwOXVoZHdrMGgwbzNrbnRrZWlycDh6MSJ9.1Xpvf-vfkPdh_0yvX9kgOw'
-            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            L.tileLayer('https://api.mapbox.com/styles/v1/mqneo/cl09ur8r9004016mqo7v9bx8b/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibXFuZW8iLCJhIjoiY2wwOXVoZHdrMGgwbzNrbnRrZWlycDh6MSJ9.1Xpvf-vfkPdh_0yvX9kgOw', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox/streets-v11',
@@ -399,3 +400,35 @@ async function main(){
     init();
 }
 main();
+
+// SPA
+let page1 = document.querySelector('#page-1');
+let page2 = document.querySelector('#page-2');
+
+document.querySelector('#page1-btn')
+    .addEventListener('click', function () {
+        let pages = document.querySelectorAll('.page');
+        // hide all the pages
+        for (let p of pages) {
+            p.classList.remove('show');
+            p.classList.add('hidden');
+        }
+
+        // show page 1
+        page1.classList.remove('hidden');
+        page1.classList.add('show');
+    })
+
+document.querySelector('#search-btn')
+    .addEventListener('click', function () {
+        let pages = document.querySelectorAll('.page');
+        // hide all the pages
+        for (let p of pages) {
+            p.classList.remove('show');
+            p.classList.add('hidden');
+        }
+
+        // show page 2
+        page2.classList.remove('hidden');
+        page2.classList.add('show');
+    })

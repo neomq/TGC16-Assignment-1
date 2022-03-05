@@ -25,7 +25,7 @@ nav .navbar {
     width: 100%;
 }
 
-#back-btn {
+#page1-btn {
     font-size: 0.9em;
 }
 
@@ -162,4 +162,34 @@ nav .navbar {
     #results-pane {
         height: 92%;
     }
+}
+
+
+/* SPA */
+.page {
+    height: 100vh;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+}
+
+/* #page-1 {
+    background-color: aliceblue;
+} */
+
+/* #page-2 {
+    display: none;
+} */
+
+#all-pages {
+    position: relative;
+}
+
+.hidden {
+    transform: translateX(100%);
+    display: none;
+}
+
+.show {
+    transform: translateX(0);
 }

@@ -15,7 +15,7 @@ async function search(keyword, near){
             'Accept': 'application/json',
             'Authorization': API_KEY
         }
-    })
+    });
     return response1.data;
 };
 
@@ -29,7 +29,7 @@ async function searchPhotos(fsq_id){
             'Accept': 'application/json',
             'Authorization': API_KEY
         }
-    })
+    });
     return response2.data;
 };
 
@@ -43,7 +43,7 @@ async function searchPlaceDetails(fsq_id){
             'Accept': 'application/json',
             'Authorization': API_KEY
         }
-    })
+    });
     return response3.data;
 };
 
