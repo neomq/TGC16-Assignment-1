@@ -91,7 +91,7 @@ async function main(){
 
         // create custom markers
         const workspaceMarker = L.icon({
-            iconUrl: 'images/csmapmarker.png',
+            iconUrl: 'images/icons/csmapmarker.png',
             iconSize: [46, 46],
             iconAnchor: [14, 0],
             popupAnchor: [9, 0]

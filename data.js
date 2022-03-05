@@ -1,5 +1,5 @@
 const API_BASE_URL="https://api.foursquare.com/v3";
-const API_KEY="fsq37HsGhtAikS5rE/pwAin+2fHwBvi5XSwQ54Cz8af+bVk=";
+const API_KEY="fsq3/G1KHWMNcr+scDbvkI6fzCVeQhjwSwd9s54dOcobtjE=";
 
 // search
 async function search(keyword, near){
