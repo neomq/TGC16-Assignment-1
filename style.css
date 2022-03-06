@@ -18,6 +18,30 @@
     font-size: 0.8em;
 }
 
+/* ERROR MSG */
+#error-popup {
+    z-index: 50;
+    position: absolute;
+    width: 300px;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+#error-popup div p {
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.alert {
+    background: #e65541E6; /* 90% opacity */
+    color: #ffffff;
+}
+
 /* NAV + SEARCH */
 .form-control::placeholder {
     color: #385260B3; /* 70% opacity */
