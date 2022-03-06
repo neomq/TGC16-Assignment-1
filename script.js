@@ -43,14 +43,14 @@ lc[0].style.visibility = 'hidden';
 // Create leaflet custom markers
 const defaultMarker = L.icon({
     iconUrl: 'images/icons/marker-grey.png',
-    iconSize: [32, 40],
+    iconSize: [34, 42],
     iconAnchor: [14, 0],
     popupAnchor: [2, 0]
 });
 
 const foodMarker = L.icon({
     iconUrl: 'images/icons/food-marker.png',
-    iconSize: [40, 40],
+    iconSize: [40, 43],
     iconAnchor: [14, 0],
     popupAnchor: [4, 0]
 });
@@ -226,7 +226,7 @@ async function getSearchResults (keyword, location){
         // get nearby food and dining info 
         let ll = `${lat},${lng}`;
         let response4 = await searchNearFood(ll);
-        //console.log(response4);
+        // console.log(response4);
         let nearFood = "";
         let searchNearbyFood;
         for (let eachFoodResult of response4.results) {
@@ -236,10 +236,10 @@ async function getSearchResults (keyword, location){
 
             let foodCoordinates = [eachFoodResult.geocodes.main.latitude, eachFoodResult.geocodes.main.longitude];
             searchNearbyFood = L.marker(foodCoordinates, { icon: foodMarker });
-            searchNearbyFood.bindPopup(`<div>
-                                    <p>${nearFood}</p>
-                                    <p>${nearFoodAddress}</p>
-                                    <p>${nearFoodDistance}m away</p>
+            searchNearbyFood.bindPopup(`<div class="layer-popup">
+                                    <p class="layer-popup-title">${nearFood}<p>
+                                    <p class="layer-popup-address">${nearFoodAddress}</p>
+                                    <p class="layer-popup-subtext">${nearFoodDistance}m away from ${eachResult.name}</p>
                                 </div>`);
             searchNearbyFood.addTo(nearbyFoodLayer);
         }
@@ -343,7 +343,7 @@ async function main(){
                 pointToLayer: function(feature, latlng) {
                     const gymMarker = L.icon({
                             iconUrl: 'images/icons/gym-marker.png',
-                            iconSize: [40, 40],
+                            iconSize: [40, 43],
                             iconAnchor: [14, 0],
                             popupAnchor: [4, 0]
                         });
@@ -362,12 +362,10 @@ async function main(){
                     let gymBuilding = columns[3].innerHTML;
                     let gymPostalCode = columns[2].innerHTML;
 
-                    layer.bindPopup(`<div>
-                                        <ul>
-                                            <li>${gymName}</li>
-                                            <li>${gymAddressStreet}, ${gymBuilding}</li>
-                                            <li>${gymPostalCode}</li>
-                                        </ul>
+                    layer.bindPopup(`<div class="layer-popup">
+                                        <p class="layer-popup-title">${gymName}</p>
+                                        <p class="layer-popup-address">${gymAddressStreet}, ${gymBuilding}</p>
+                                        <p class="layer-popup-address">${gymPostalCode}</p>
                                     </div>`);
                 }
             }).addTo(gymLayerGroup);
@@ -383,7 +381,7 @@ async function main(){
                 pointToLayer: function(feature, latlng) {
                     const marketMarker = L.icon({
                             iconUrl: 'images/icons/market-marker.png',
-                            iconSize: [40, 40],
+                            iconSize: [40, 43],
                             iconAnchor: [14, 0],
                             popupAnchor: [4, 0]
                         });
@@ -402,13 +400,9 @@ async function main(){
                     let supermarketStreet = columns[2].innerHTML;
                     let supermarketPostCode = columns[4].innerHTML;
 
-                    layer.bindPopup(`<div>
-                                        <ul>
-                                            <li>${supermarketName}</li>
-                                            <li>${supermarketBlk}</li>
-                                            <li>${supermarketStreet}</li>
-                                            <li>${supermarketPostCode}</li>
-                                        </ul>
+                    layer.bindPopup(`<div class="layer-popup">
+                                        <p class="layer-popup-title">${supermarketName}</p>
+                                        <p class="layer-popup-address">${supermarketBlk} ${supermarketStreet}, ${supermarketStreet}</p>
                                     </div>`);
                 }
             }).addTo(supermarketsLayer);
