@@ -12,6 +12,15 @@
     /* overflow: hidden; */
 }
 
+/* LOGO */
+#site-logo {
+    position: absolute;
+    z-index: 100;
+    top: 30px;
+    left: 40px;
+}
+
+
 /* ALL ICONS */
 .searchbar-icon,
 .layer-icon {
@@ -51,9 +60,26 @@
     font-weight: 600 !important;
 }
 
+/* HOME PAGE */
+
+.page1-header {
+    max-width: 650px;
+}
+
+.page1-header h1 {
+    font-size: 3.7em;
+    line-height: 1.1em;
+    letter-spacing: 0.04em;
+}
+
+.page1-header p {
+    letter-spacing: 0.05em;
+    font-weight: 400;
+}
+
 /* NAV + SEARCH */
 .form-control::placeholder {
-    color: #385260B3; /* 70% opacity */
+    color: #38526099; /* 60% opacity */
 }
 
 nav .navbar {
@@ -77,6 +103,8 @@ nav .navbar {
 #search-input,
 #location-input {
     font-size: 0.9em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .searchbar-icon {
@@ -85,9 +113,8 @@ nav .navbar {
 
 #search-btn {
     font-size: 0.9em;
-}
-
-#search-btn {
+    font-weight: 500;
+    letter-spacing: 0.04em;
     background: #e65541;
     border: 2px solid #e65541;
     color: #ffffff;
@@ -107,8 +134,8 @@ nav .navbar {
     border-radius: 4px;
 }
 
-#page1-btn {
-    font-size: 0.9em;
+#home-btn {
+    padding: 0;
 }
 
 #page2-keyword-box,
@@ -289,6 +316,7 @@ nav .navbar {
 
 .backdrop-filter {
     height: 100vh;
+    z-index: 1;
     background-color: #4d4d4d50;
     backdrop-filter: blur(3px);
 }

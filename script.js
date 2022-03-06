@@ -301,7 +301,7 @@ async function startSearch() {
             if (website !== "") {
                 let resultWeb = document.createElement('div');
                 resultWeb.className = 'mt-3';
-                resultWeb.innerHTML = `<a class="btn btn-outline-secondary btn-sm" href="${website}" role="button">Visit Website</a>`;
+                resultWeb.innerHTML = `<a class="btn btn-outline-secondary btn-sm" href="${website}" target="_blank" role="button">Visit Website</a>`;
                 resultElementCard.appendChild(resultWeb);
             }
 
@@ -519,7 +519,7 @@ function toSearchPage(){
     page2.classList.add('show');
 };
 
-document.querySelector('#page1-btn').addEventListener('click', toHomePage);
+document.querySelector('#home-btn').addEventListener('click', toHomePage);
 document.querySelector('#search-btn').addEventListener('click', function(){
 
     // perform form validation
