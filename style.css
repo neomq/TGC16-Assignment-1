@@ -90,6 +90,7 @@ nav .navbar {
 
 .navbar-toggler {
     font-size: 0.8em;
+    color: #385260;
 }
 
 .search-container {
@@ -103,7 +104,7 @@ nav .navbar {
 #search-input,
 #location-input {
     font-size: 0.9em;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 0.02em;
 }
 
@@ -159,7 +160,7 @@ nav .navbar {
 #layer-container {
     position: absolute;
     width: 100%;
-    top: 15%;
+    top: 100px;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 314159;
@@ -214,10 +215,12 @@ nav .navbar {
 
 #results-title {
     font-size: 1.2em;
+    letter-spacing: 0.01em;
 }
 
 .card-title {
     font-size: 1.2em;
+    letter-spacing: 0.01em;
 }
 
 .card-category,
@@ -253,8 +256,21 @@ nav .navbar {
 /* Leaflet Popup */
 .leaflet-popup-content-wrapper, .leaflet-popup.tip {
     background-color: #FCFCFC;
+}
+
+.popup-title {
+    font-size: 1.4em;
     color: #385260;
-  }
+    line-height: 1.2em;
+    letter-spacing: 0.02em;
+}
+
+.popup-address {
+    font-size: 1.2em;
+    line-height: 1.3em;
+    letter-spacing: 0.01em;
+    color: #385260CC; /* 80% OPACITY */
+}
 
 /* For MD and LG screen size */
 @media screen and (min-width: 768px) {
@@ -276,6 +292,10 @@ nav .navbar {
 
     #sgmap {
         width: 100%;
+    }
+
+    #layer-container {
+        top: 120px;
     }
 
     #results-container {
