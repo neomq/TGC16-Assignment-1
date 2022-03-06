@@ -41,9 +41,16 @@ let lc = document.getElementsByClassName('leaflet-control-layers');
 lc[0].style.visibility = 'hidden';
 
 // Create leaflet custom markers
-const workspaceMarker = L.icon({
-    iconUrl: 'images/icons/cs-mapmarker.png',
-    iconSize: [33, 40],
+const defaultMarker = L.icon({
+    iconUrl: 'images/icons/marker-grey.png',
+    iconSize: [32, 40],
+    iconAnchor: [14, 0],
+    popupAnchor: [2, 0]
+});
+
+const foodMarker = L.icon({
+    iconUrl: 'images/icons/food-marker.png',
+    iconSize: [40, 40],
     iconAnchor: [14, 0],
     popupAnchor: [4, 0]
 });
@@ -175,7 +182,7 @@ async function getSearchResults (keyword, location){
         let coordinates = [lat, lng];
 
         // create marker
-        let searchMarker = L.marker(coordinates, { icon: workspaceMarker });
+        let searchMarker = L.marker(coordinates, { icon: defaultMarker });
 
         // get address from results
         let address = eachResult.location.formatted_address;
@@ -221,20 +228,20 @@ async function getSearchResults (keyword, location){
         let response4 = await searchNearFood(ll);
         //console.log(response4);
         let nearFood = "";
-        //let foodArray = [];
         let searchNearbyFood;
         for (let eachFoodResult of response4.results) {
             nearFood = eachFoodResult.name;
             nearFoodAddress = eachFoodResult.location.formatted_address;
             nearFoodDistance = eachFoodResult.distance;
-            searchNearbyFood = L.marker([eachFoodResult.geocodes.main.latitude, eachFoodResult.geocodes.main.longitude]);
+
+            let foodCoordinates = [eachFoodResult.geocodes.main.latitude, eachFoodResult.geocodes.main.longitude];
+            searchNearbyFood = L.marker(foodCoordinates, { icon: foodMarker });
             searchNearbyFood.bindPopup(`<div>
                                     <p>${nearFood}</p>
                                     <p>${nearFoodAddress}</p>
                                     <p>${nearFoodDistance}m away</p>
                                 </div>`);
             searchNearbyFood.addTo(nearbyFoodLayer);
-            //foodArray.push(nearFood);
         }
 
         // create popup content
@@ -333,6 +340,15 @@ async function main(){
             let response = await axios.get('data/gyms.geojson');
 
             let gymsLayer = L.geoJson(response.data, {
+                pointToLayer: function(feature, latlng) {
+                    const gymMarker = L.icon({
+                            iconUrl: 'images/icons/gym-marker.png',
+                            iconSize: [40, 40],
+                            iconAnchor: [14, 0],
+                            popupAnchor: [4, 0]
+                        });
+                    return L.marker(latlng, {icon: gymMarker});
+                },
                 onEachFeature: function (feature, layer) {
                     // console.log(feature.properties)
                     layer.bindPopup(feature.properties.Description);
@@ -364,6 +380,15 @@ async function main(){
             let response = await axios.get('data/supermarkets.geojson');
 
             let supermarketLayer = L.geoJson(response.data, {
+                pointToLayer: function(feature, latlng) {
+                    const marketMarker = L.icon({
+                            iconUrl: 'images/icons/market-marker.png',
+                            iconSize: [40, 40],
+                            iconAnchor: [14, 0],
+                            popupAnchor: [4, 0]
+                        });
+                    return L.marker(latlng, {icon: marketMarker});
+                },
                 onEachFeature: function (feature, layer) {
                     // console.log(feature.properties)
                     layer.bindPopup(feature.properties.Description);
