@@ -25,8 +25,7 @@
     width: 300px;
     top: 10%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    
+    transform: translate(-50%, -50%);   
 }
 
 #error-popup div p {
@@ -40,6 +39,16 @@
 .alert {
     background: #e65541E6; /* 90% opacity */
     color: #ffffff;
+}
+
+.error-popup2 {
+    border: 2px solid #e65441 !important;
+}
+
+.error-popup2 > div {
+    color: #e65541;
+    font-size: 0.9em;;
+    font-weight: 600 !important;
 }
 
 /* NAV + SEARCH */

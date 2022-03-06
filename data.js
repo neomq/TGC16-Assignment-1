@@ -6,7 +6,7 @@ async function search(keyword, near){
     let response1 = await axios.get(API_BASE_URL + '/places/search', {
         params: {
             'query': keyword,
-            'categories': "11128,11147",
+            'categories': "11128",
             'near': near,
             'limit': 50,
             'v': '02272022'
