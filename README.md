@@ -62,7 +62,7 @@ ng the app on their mobile devices.
 4. Error Prevention & Recovery
     - Dsiplay an error message to the user when user performs an invalid search. A simple instruction is given to help the user perform a valid search.
 
-**Information Architecture**
+**Information Architecture:**
 1. A linear web structure to optimise user-friendliness.
 
 ### 4. Skeleton
@@ -80,7 +80,10 @@ Below are some of the factors that have been considered when designing the user 
     - To establish visual hierarchy, all headings have bolder font weight than body text. Important elements such as the search button have a stronger colour. Supporting information (i.e. opening hours, address) have a lighter font weight.
 5. Typography
     - To ensure a comfortable reading experience, only one typeface is used (default typeface of bootstrap).
-    - 
+
+**Skeleton:**
+![This is an image](images/skeleton.jpg)
+
 
 ### 5. Visual Design
 **Colour Palette**

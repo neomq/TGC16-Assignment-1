@@ -75,7 +75,7 @@
 
 /* NAV + SEARCH */
 .form-control::placeholder {
-    color: #38526099; /* 60% opacity */
+    color: #15375699; /* 60% opacity */
 }
 
 nav .navbar {
@@ -86,7 +86,7 @@ nav .navbar {
 
 .navbar-toggler {
     font-size: 0.8em;
-    color: #385260;
+    color: #153756;
 }
 
 .search-container {
@@ -105,7 +105,7 @@ nav .navbar {
 }
 
 .searchbar-icon {
-    color: #385260;
+    color: #153756;
 }
 
 #search-btn {
@@ -122,7 +122,7 @@ nav .navbar {
 }
 
 .page1-search-container {
-    background-color: #EFEEEC;
+    background-color: #efeeec;
 }
 
 #page1-keyword-box,
@@ -137,7 +137,7 @@ nav .navbar {
 
 #page2-keyword-box,
 #page2-location-box {
-    background: #EFEEEC60;
+    background: #f9f9f8;
     border-radius: 4px;
 }
 
@@ -169,7 +169,7 @@ nav .navbar {
 
 #layer-toggle button {
     background-color: #FCFCFC;
-    color: #385260;
+    color: #153756;
 }
 
 /* RESULTS */
@@ -211,7 +211,7 @@ nav .navbar {
 #results-header,
 .card-title,
 .card-text {
-    color: #385260;
+    color: #153756;
 }
 
 #results-title {
@@ -227,7 +227,7 @@ nav .navbar {
 .card-category,
 .card-text {
     font-size: 0.95em;
-    color: #385260CC; /* 80% OPACITY */
+    color: #153756CC; /* 80% OPACITY */
 }
 
 #results-filter {
@@ -251,7 +251,7 @@ nav .navbar {
 }
 
 #hide-btn {
-    color: #38526080;
+    color: #15375680;
 }
 
 /* Leaflet Popup */
@@ -261,7 +261,7 @@ nav .navbar {
 
 .popup-title {
     font-size: 1.4em;
-    color: #385260;
+    color: #153756;
     line-height: 1.2em;
     letter-spacing: 0.02em;
 }
@@ -270,7 +270,7 @@ nav .navbar {
     font-size: 1.2em;
     line-height: 1.3em;
     letter-spacing: 0.01em;
-    color: #385260CC; /* 80% OPACITY */
+    color: #153756CC; /* 80% OPACITY */
 }
 
 /* Leaflet Layer Popup */
@@ -279,7 +279,7 @@ nav .navbar {
     font-size: 1.2em;
     font-weight: 500;
     letter-spacing: 0.03em;
-    color: #385260;
+    color: #153756;
 }
 
 .layer-popup-address {
@@ -287,7 +287,7 @@ nav .navbar {
     font-size: 1em;
     font-weight: 400;
     letter-spacing: 0.03em;
-    color: #385260;
+    color: #153756;
 }
 
 .layer-popup-subtext {
@@ -295,7 +295,7 @@ nav .navbar {
     font-size: 1em;
     font-weight: 500;
     letter-spacing: 0.03em;
-    color: #38526099;
+    color: #15375699;
 }
 
 /* For MD and LG screen size */
