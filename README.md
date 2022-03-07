@@ -81,7 +81,8 @@ Below are some of the factors that have been considered when designing the user 
     - To ensure a comfortable reading experience, only one typeface is used (default typeface of bootstrap).
 
 **Skeleton:**
-![This is an image](images/skeleton.jpg)
+
+![This is an image](images/skeleton.png)
 
 
 ### 5. Visual Design
