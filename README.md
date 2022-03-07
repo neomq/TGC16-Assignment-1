@@ -1,8 +1,7 @@
 # **Discover Co-working Spaces in Singapore**
-
 ![This is an image](images/banner.jpg)
-
-<br />
+View the site here: https://flamboyant-bohr-995116.netlify.app/
+Deployed using Netlify (https://www.netlify.com/)
 
 ## 1. Project Summary
 
@@ -107,6 +106,7 @@ The website uses leaflet map to mark the locations of the search results and dis
 - Data sources:
     - Foursquare places API (https://developer.foursquare.com/docs/places-api-overview)
     - Geojson of gyms and supermarket locations in Singapore from https://data.gov.sg/
+- Axios for calling of API
 - Home page background from Unsplash (https://unsplash.com/photos/J67BWDuNq0U)
 - All icons from font awesome (https://fontawesome.com/)
 
