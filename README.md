@@ -1,4 +1,7 @@
 # **Discover Co-working Spaces in Singapore**
+
+<br />
+
 ## 1. Project Summary
 
 ### **Background**
@@ -36,6 +39,7 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 - Allows users to perform basic search using a search bar. Users are able to search by location and keyword.
 - An interactive map that displays the location of all the search results and users are able to toggle between different map layers showing locations of nearby amenities.
 - An informative display of search results that provides the address, opening hours and link to website for more information.
+
 **Non-Functional Requirements:**
 - Mobile responsiveness: to cater to users on the go who are using the app on their mobile devices.
 - Usability: Easy to perform the search and view search results.
@@ -53,6 +57,22 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 - User interface is intuitive and easy to use
 4. Error Prevention & Recovery
 - Dsiplay an error message to the user when user performs an invalid search. A simple instruction is given to help the user perform a valid search.
+
 **Information Architecture**
 1. A linear web structure to optimise user-friendliness.
 
+### 4. Skeleton
+**Interface Design:**
+Below are some of the factors that have been considered when designing the user interface:
+1. Mobile friendliness
+- UI elements and text are able to fit on different screen sizes
+2. Contrast
+- Contrast is applied to important text (i.e. Title of search result), icons and search button as best as possible to draw users attention
+3. Familiarity
+- UI elements (i.e. search box, search button, close button, links etc.) are intuitive and performs the expected behaviour that users have been accustomed to.
+4. Font and colour weight
+- To establish visual hierarchy, all headings have bolder font weight than body text. Important elements such as the search button have a stronger colour. Supporting information (i.e. opening hours, address) have a lighter font weight.
+5. Typography
+- Only one typeface is used (default typeface of bootstrap)
+
+### 5. Visual Design
