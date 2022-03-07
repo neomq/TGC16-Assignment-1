@@ -32,4 +32,27 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 3. **Site Objective**: To suggest or help target users search for their ideal workspaces by giving an overview of the different locations of co-working spaces in singapore via an interactive map, or help users to search for available co-working spaces around an area.
 
 ### 2. Scope
+**Functional Requirements:**
+- Allows users to perform basic search using a search bar. Users are able to search by location and keyword.
+- An interactive map that displays the location of all the search results and users are able to toggle between different map layers showing locations of nearby amenities.
+- An informative display of search results that provides the address, opening hours and link to website for more information.
+**Non-Functional Requirements:**
+- Mobile responsiveness: to cater to users on the go who are using the app on their mobile devices.
+- Usability: Easy to perform the search and view search results.
+
+### 3. Structure
+**Interaction Design:**
+1. Discoverability & Accessibility:
+- Search bar and search button is prominently displayed. Size of the search button is large to allow a larger clickable area for ease of clicking.
+- Search bar is also accessible on both the home page and on the map.
+- Icons on map buttons are labelled to give clarity to the button function.
+2. Consistency:
+- Consistent font styles, background and colours are used throughout to eliminate confusion of the user.
+- Graphic elements are placed at commonly used locations on the web page that are familiar to the user (i.e. logo on the top left and search bar on top)
+3. Learnability:
+- User interface is intuitive and easy to use
+4. Error Prevention & Recovery
+- Dsiplay an error message to the user when user performs an invalid search. A simple instruction is given to help the user perform a valid search.
+**Information Architecture**
+1. A linear web structure to optimise user-friendliness.
 
