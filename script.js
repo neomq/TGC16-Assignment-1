@@ -52,7 +52,7 @@ const foodMarker = L.icon({
     iconUrl: 'images/icons/food-marker.png',
     iconSize: [40, 43],
     iconAnchor: [14, 0],
-    popupAnchor: [4, 0]
+    popupAnchor: [5, 0]
 });
 
 // set search results div as global variable
@@ -345,7 +345,7 @@ async function main(){
                             iconUrl: 'images/icons/gym-marker.png',
                             iconSize: [40, 43],
                             iconAnchor: [14, 0],
-                            popupAnchor: [4, 0]
+                            popupAnchor: [5, 0]
                         });
                     return L.marker(latlng, {icon: gymMarker});
                 },
@@ -383,7 +383,7 @@ async function main(){
                             iconUrl: 'images/icons/market-marker.png',
                             iconSize: [40, 43],
                             iconAnchor: [14, 0],
-                            popupAnchor: [4, 0]
+                            popupAnchor: [5, 0]
                         });
                     return L.marker(latlng, {icon: marketMarker});
                 },
@@ -501,6 +501,9 @@ async function main(){
 
                     // start search
                     startSearch();
+
+                    document.getElementById('#location-input').reset();
+                    document.getElementById('#search-input').reset();
 
                 }); // end of search button click function
             }; // end of search button for loop
