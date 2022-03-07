@@ -25,7 +25,7 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 ### **User Stories**
 | User Story                                                                                                                             	| Acceptance Criteria                                                                                       	|
 |----------------------------------------------------------------------------------------------------------------------------------------	|-----------------------------------------------------------------------------------------------------------	|
-| As a remote worker, i would like a conducive and productive work environment that caters to my daily working needs.                    	| Working space has power outlet, sufficient desk space, good wifi and stationery etc.                      	|
+| As a remote worker, i would like a conducive and productive work environment that caters to my daily working needs.                    	| A working space has power outlet, sufficient desk space, good wifi and stationery etc.                      	|
 | As an office employee working from home, i would like a work environment that could maintain my boundaries of work and personal life.  	| A work environment that offers structure and routine to my work days, and is accessible 24/7 on weekdays. 	|
 | As a freelancer / entrepreneur, i would like a comfortable working space that could boost my creativity and help me inspire new ideas. 	| An innovative, open space unlike traditional offices that allows for collaboration.                       	|
 | As an entreprenuer, i would like a work environment that allows me to network and connect with business professionals.                 	| A work space that allows for opportunity to meet new people that would help grow my business.             	|
@@ -44,7 +44,8 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 - Users can choose to hide the search results to allow the map a larger area for viewing and interaction.
 
 **Non-Functional Requirements:**
-- Mobile responsiveness: to cater to users on the go who are using the app on their mobile devices.
+- Mobile responsiveness: to cater to users on the go who are usi
+ng the app on their mobile devices.
 - Usability: Easy to perform the search and view search results.
 
 ### 3. Structure
@@ -96,9 +97,7 @@ The website uses leaflet map to mark the locations of the search results and dis
 
 <br />
 
-## 4. Features
-
-### **Technologies Used / Credits**
+## 4. Technologies Used / Credits
 
 - Built using HTML, CSS, Bootstrap and Javascript
 - Map is created using Leaflet (https://leafletjs.com/SlavaUkraini/reference.html)
@@ -112,8 +111,31 @@ The website uses leaflet map to mark the locations of the search results and dis
 
 ## 5. Testing
 
+### **Perform basic search on home page**
+1. Input a location (e.g. Raffles) and/or keyword (e.g. Wework) into the search field and click on search.
+2. Website should take you to the next page where the search results will appear along with a map displaying the locations of the search results.
+3. In cases where user keys in a search word containing special characters (i.e. ~!@#$%^&*_+(){}|:"<>?), an error message will appear
+4. In cases where user performs an empty search (no search word in the input fields), website would show 50 suggestions of co-working spaces in singapore.
 
+### **Perform basic search on map page**
+1. To peform a new search, input a new location and/or keyword into the search field and click on search
+2. Search results would refresh and display results of the new search
+3. In cases where user keys in a search word containing special characters (i.e. ~!@#$%^&*_+(){}|:"<>?), an error message will appear on the search results display.
 
+### **Toggle map layers**
+1. Click on the buttons on the top of the map to hide / show the locations of food, gyms and supermarket.
+2. Locations of nearby food will only be displayed for the co-working spaces searched by the user. For gyms and supermarkets, the map will display their locations all over Singapore.
 
+### **Hide and show search results**
+1. click on the "close" button at the top left of the search results display to hide the search results.
+2. click on the icon at the bottom left of the map to show the search results.
 
+### **Check hyperlink**
+1. Perform an empty search on the website to show 50 suggestions of Co-working spaces in singapore.
+2. scroll through the search results and click on "visit website" of any search result.
+3. Website will be opened in a new tab
+
+### **Return to homepage**
+1. Go back to the home page by clicking on the logo at the top left of the page.
+2. Webiste should return to the main page
 
