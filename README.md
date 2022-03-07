@@ -1,5 +1,7 @@
 # **Discover Co-working Spaces in Singapore**
 
+![This is an image](images/banner.jpg)
+
 <br />
 
 ## 1. Project Summary
@@ -39,6 +41,7 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 - Allows users to perform basic search using a search bar. Users are able to search by location and keyword.
 - An interactive map that displays the location of all the search results and users are able to toggle between different map layers showing locations of nearby amenities.
 - An informative display of search results that provides the address, opening hours and link to website for more information.
+- Users can choose to hide the search results to allow the map a larger area for viewing and interaction.
 
 **Non-Functional Requirements:**
 - Mobile responsiveness: to cater to users on the go who are using the app on their mobile devices.
@@ -47,32 +50,70 @@ Remote working and hotdesking are proving to be the new normal in the future of 
 ### 3. Structure
 **Interaction Design:**
 1. Discoverability & Accessibility:
-- Search bar and search button is prominently displayed. Size of the search button is large to allow a larger clickable area for ease of clicking.
-- Search bar is also accessible on both the home page and on the map.
-- Icons on map buttons are labelled to give clarity to the button function.
+    - Search bar and search button is prominently displayed. Size of the search button is large to allow a larger clickable area for ease of clicking.
+    - Search bar is also accessible on both the home page and on the map.
+    - Icons on map buttons are labelled for clarity.
 2. Consistency:
-- Consistent font styles, background and colours are used throughout to eliminate confusion of the user.
-- Graphic elements are placed at commonly used locations on the web page that are familiar to the user (i.e. logo on the top left and search bar on top)
+    - Consistent font styles, background and colours are used throughout to eliminate confusion of the user.
+    - Graphic elements are placed at commonly used locations on the web page that are familiar to the user (i.e. logo on the top left and search bar on top)
 3. Learnability:
-- User interface is intuitive and easy to use
+    - User interface is intuitive and easy to use
 4. Error Prevention & Recovery
-- Dsiplay an error message to the user when user performs an invalid search. A simple instruction is given to help the user perform a valid search.
+    - Dsiplay an error message to the user when user performs an invalid search. A simple instruction is given to help the user perform a valid search.
 
 **Information Architecture**
 1. A linear web structure to optimise user-friendliness.
 
 ### 4. Skeleton
 **Interface Design:**
+
 Below are some of the factors that have been considered when designing the user interface:
-1. Mobile friendliness
-- UI elements and text are able to fit on different screen sizes
+1. Resonsiveness
+    - UI elements and text are able to fit on different screen sizes while still maintaing a visually pleasant look.
+    - search bar is hidden and made into a collapsible bar on smaller screen devices.
 2. Contrast
-- Contrast is applied to important text (i.e. Title of search result), icons and search button as best as possible to draw users attention
+    - Contrast is applied to important text (i.e. title of search result), icons and search button as best as possible to draw users attention
 3. Familiarity
-- UI elements (i.e. search box, search button, close button, links etc.) are intuitive and performs the expected behaviour that users have been accustomed to.
+    - UI elements (i.e. search box, search button, close button, links etc.) are intuitive and performs the expected behaviour that users have been accustomed to.
 4. Font and colour weight
-- To establish visual hierarchy, all headings have bolder font weight than body text. Important elements such as the search button have a stronger colour. Supporting information (i.e. opening hours, address) have a lighter font weight.
+    - To establish visual hierarchy, all headings have bolder font weight than body text. Important elements such as the search button have a stronger colour. Supporting information (i.e. opening hours, address) have a lighter font weight.
 5. Typography
-- Only one typeface is used (default typeface of bootstrap)
+    - To ensure a comfortable reading experience, only one typeface is used (default typeface of bootstrap).
+    - 
 
 ### 5. Visual Design
+**Colour Palette**
+
+![This is an image](images/colour.jpg)
+A simple colour palette with vibrant orange and dark blue to create a professional look and balanced out with a neutral off-white colour.
+
+<br />
+
+## 3. Features
+
+### **Map**
+The website uses leaflet map to mark the locations of the search results and display a popup of photos and address details when user clicks on the location on the map. User can also toggle between map layers to show and hide the amenities nearby the targetted location.
+
+<br />
+
+## 4. Features
+
+### **Technologies Used / Credits**
+
+- Built using HTML, CSS, Bootstrap and Javascript
+- Map is created using Leaflet (https://leafletjs.com/SlavaUkraini/reference.html)
+- Data sources:
+    - Foursquare places API (https://developer.foursquare.com/docs/places-api-overview)
+    - Geojson of gyms and supermarket locations in Singapore from https://data.gov.sg/
+- Home page background from Unsplash (https://unsplash.com/photos/J67BWDuNq0U)
+- All icons from font awesome (https://fontawesome.com/)
+
+<br />
+
+## 5. Testing
+
+
+
+
+
+

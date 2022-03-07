@@ -169,8 +169,8 @@ async function getSearchResults (keyword, location){
     }
 
     // display results filter
-    let searchFilter = document.querySelector('#results-filter');
-    searchFilter.style.display = "block";
+    // let searchFilter = document.querySelector('#results-filter');
+    // searchFilter.style.display = "block";
 
     // map layers toggle to appear
     document.querySelector("#layer-container").style.display = "block";
@@ -501,9 +501,6 @@ async function main(){
 
                     // start search
                     startSearch();
-
-                    document.getElementById('#location-input').reset();
-                    document.getElementById('#search-input').reset();
 
                 }); // end of search button click function
             }; // end of search button for loop
